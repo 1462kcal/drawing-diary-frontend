@@ -1,12 +1,10 @@
-{
-  /* <Toolbar/>
+import { CanvasStage, Toolbar } from "../features/canvas";
 
-<CanvasStage/> */
-}
 export default function CanvasPage() {
   return (
-    <div>
-      <h1>Canvas Page</h1>
-    </div>
+    <>
+      <Toolbar />
+      <CanvasStage />
+    </>
   );
 }

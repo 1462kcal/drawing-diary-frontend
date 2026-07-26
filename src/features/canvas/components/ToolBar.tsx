@@ -7,8 +7,15 @@
 // 굵기
 
 // 저장
-function Toolbar() {
-  return <div>Toolbar</div>;
+export default function Toolbar() {
+  return (
+    <div
+      style={{
+        padding: "12px",
+        borderBottom: "1px solid #ddd",
+      }}
+    >
+      Toolbar
+    </div>
+  );
 }
-
-export default Toolbar;
