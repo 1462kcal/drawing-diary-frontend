@@ -1,11 +1,7 @@
 export interface Stroke {
   id: string;
-
-  tool: "brush" | "eraser";
-
+  tool: "brush";
   color: string;
-
   strokeWidth: number;
-
   points: number[];
 }

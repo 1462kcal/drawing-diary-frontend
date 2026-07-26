@@ -1,23 +1,48 @@
-import { Stage, Layer } from "react-konva";
+import { Stage, Layer, Line } from "react-konva";
+import useCanvas from "../hooks/useCanvas";
 
 export default function CanvasStage() {
+  const { strokes, startDrawing, draw, endDrawing } = useCanvas();
+
   return (
     <div
       style={{
         display: "flex",
         justifyContent: "center",
-        marginTop: "20px",
+        marginTop: 20,
+        touchAction: "none",
+        userSelect: "none",
       }}
     >
       <Stage
         width={1000}
         height={700}
-        style={{
-          border: "1px solid #dcdcdc",
-          backgroundColor: "#ffffff",
+        onPointerDown={(e) => {
+          e.evt.preventDefault();
+          startDrawing(e.target.getStage()!);
+        }}
+        onPointerMove={(e) => {
+          e.evt.preventDefault();
+          draw(e.target.getStage()!);
+        }}
+        onPointerUp={(e) => {
+          e.evt.preventDefault();
+          endDrawing();
         }}
       >
-        <Layer />
+        <Layer>
+          {strokes.map((stroke) => (
+            <Line
+              key={stroke.id}
+              points={stroke.points}
+              stroke={stroke.color}
+              strokeWidth={stroke.strokeWidth}
+              tension={0.5}
+              lineCap="round"
+              lineJoin="round"
+            />
+          ))}
+        </Layer>
       </Stage>
     </div>
   );
