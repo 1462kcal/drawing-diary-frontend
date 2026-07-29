@@ -38,9 +38,12 @@ export default function CanvasStage() {
               stroke={stroke.color}
               strokeWidth={stroke.strokeWidth}
               opacity={stroke.opacity / 100}
-              tension={0.5}
               lineCap="round"
               lineJoin="round"
+              tension={0.5}
+              globalCompositeOperation={
+                stroke.tool === "eraser" ? "destination-out" : "source-over"
+              }
             />
           ))}
         </Layer>
