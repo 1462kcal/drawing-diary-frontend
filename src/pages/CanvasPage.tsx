@@ -1,12 +1,20 @@
-{
-  /* <Toolbar/>
+import { CanvasStage, Toolbar, Sidebar } from "../features/canvas";
 
-<CanvasStage/> */
-}
 export default function CanvasPage() {
   return (
-    <div>
-      <h1>Canvas Page</h1>
+    <div
+      style={{
+        display: "flex",
+        justifyContent: "center",
+        gap: 20,
+        marginTop: 20,
+      }}
+    >
+      <Sidebar />
+
+      <CanvasStage />
+
+      <Toolbar />
     </div>
   );
 }

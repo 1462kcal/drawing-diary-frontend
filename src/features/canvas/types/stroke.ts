@@ -1,11 +1,14 @@
+import type { Tool } from "./tool";
+
 export interface Stroke {
   id: string;
-
-  tool: "brush" | "eraser";
+  tool: Tool;
 
   color: string;
 
   strokeWidth: number;
+
+  opacity: number;
 
   points: number[];
 }

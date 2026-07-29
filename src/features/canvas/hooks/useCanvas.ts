@@ -1,9 +1,58 @@
-// startDrawing();
+import { useState } from "react";
+import Konva from "konva";
+import { useCanvasStore } from "../store/canvasStore";
+import type { Stroke } from "../types/stroke";
 
-// draw();
+export default function useCanvas() {
+  const { tool, color, brushSize, opacity, strokes, addStroke, setStrokes } =
+    useCanvasStore();
 
-// endDrawing();
+  const [isDrawing, setIsDrawing] = useState(false);
 
-// undo();
+  const startDrawing = (stage: Konva.Stage) => {
+    const point = stage.getPointerPosition();
 
-// redo();
+    if (!point) return;
+
+    const stroke: Stroke = {
+      id: crypto.randomUUID(),
+      tool,
+      color,
+      strokeWidth: brushSize,
+      opacity,
+      points: [point.x, point.y],
+    };
+
+    addStroke(stroke);
+
+    setIsDrawing(true);
+  };
+
+  const draw = (stage: Konva.Stage) => {
+    if (!isDrawing) return;
+
+    const point = stage.getPointerPosition();
+
+    if (!point) return;
+
+    const updated = [...strokes];
+
+    updated[updated.length - 1] = {
+      ...updated[updated.length - 1],
+      points: [...updated[updated.length - 1].points, point.x, point.y],
+    };
+
+    setStrokes(updated);
+  };
+
+  const endDrawing = () => {
+    setIsDrawing(false);
+  };
+
+  return {
+    strokes,
+    startDrawing,
+    draw,
+    endDrawing,
+  };
+}
