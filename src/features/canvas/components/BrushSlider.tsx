@@ -2,26 +2,44 @@ interface BrushSliderProps {
   label: string;
   min: number;
   max: number;
+  value: number;
+  onChange: (value: number) => void;
 }
 
-export default function BrushSlider({ label, min, max }: BrushSliderProps) {
+export default function BrushSlider({
+  label,
+  min,
+  max,
+  value,
+  onChange,
+}: BrushSliderProps) {
   return (
     <div
       style={{
         display: "flex",
         flexDirection: "column",
-        gap: 6,
+        gap: 8,
       }}
     >
-      <span
+      <div
         style={{
-          fontSize: 12,
+          display: "flex",
+          justifyContent: "space-between",
+          fontSize: 13,
         }}
       >
-        {label}
-      </span>
+        <span>{label}</span>
 
-      <input type="range" min={min} max={max} defaultValue={5} />
+        <span>{value}</span>
+      </div>
+
+      <input
+        type="range"
+        min={min}
+        max={max}
+        value={value}
+        onChange={(e) => onChange(Number(e.target.value))}
+      />
     </div>
   );
 }
