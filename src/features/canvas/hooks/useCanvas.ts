@@ -37,11 +37,10 @@ export default function useCanvas() {
 
     const updated = [...strokes];
 
-    const last = updated[updated.length - 1];
-
-    if (!last) return;
-
-    last.points = [...last.points, point.x, point.y];
+    updated[updated.length - 1] = {
+      ...updated[updated.length - 1],
+      points: [...updated[updated.length - 1].points, point.x, point.y],
+    };
 
     setStrokes(updated);
   };
@@ -52,11 +51,8 @@ export default function useCanvas() {
 
   return {
     strokes,
-
     startDrawing,
-
     draw,
-
     endDrawing,
   };
 }

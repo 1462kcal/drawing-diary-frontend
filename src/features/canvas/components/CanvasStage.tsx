@@ -37,6 +37,7 @@ export default function CanvasStage() {
               points={stroke.points}
               stroke={stroke.color}
               strokeWidth={stroke.strokeWidth}
+              opacity={stroke.opacity / 100}
               tension={0.5}
               lineCap="round"
               lineJoin="round"

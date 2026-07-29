@@ -6,8 +6,22 @@ import BrushSlider from "./BrushSlider";
 import { useCanvasStore } from "../store/canvasStore";
 
 export default function Toolbar() {
-  const { tool, setTool, brushSize, setBrushSize, opacity, setOpacity } =
-    useCanvasStore();
+  const {
+    tool,
+    setTool,
+
+    brushSize,
+    setBrushSize,
+
+    opacity,
+    setOpacity,
+
+    undo,
+    redo,
+
+    strokes,
+    redoStack,
+  } = useCanvasStore();
 
   return (
     <aside
@@ -36,11 +50,11 @@ export default function Toolbar() {
             gap: 6,
           }}
         >
-          <ToolButton>
+          <ToolButton onClick={undo} disabled={strokes.length === 0}>
             <Undo2 size={18} />
           </ToolButton>
 
-          <ToolButton>
+          <ToolButton onClick={redo} disabled={redoStack.length === 0}>
             <Redo2 size={18} />
           </ToolButton>
         </div>
