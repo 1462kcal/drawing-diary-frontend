@@ -1,7 +1,7 @@
 import { useCanvasStore } from "../store/canvasStore";
 
 export default function ColorPicker() {
-  const { color, setColor } = useCanvasStore();
+  const { color, setColor, addRecentColor } = useCanvasStore();
 
   return (
     <div
@@ -28,7 +28,17 @@ export default function ColorPicker() {
       <input
         type="color"
         value={color}
-        onChange={(e) => setColor(e.target.value)}
+
+        // 색상 미리보기만 변경
+        onChange={(e) => {
+          setColor(e.target.value);
+        }}
+
+        // 선택 끝났을 때 저장
+        onBlur={(e) => {
+          addRecentColor(e.target.value);
+        }}
+
         style={{
           width: 100,
           height: 100,

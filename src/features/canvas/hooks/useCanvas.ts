@@ -1,58 +1,29 @@
-import { useState } from "react";
 import Konva from "konva";
+
 import { useCanvasStore } from "../store/canvasStore";
-import type { Stroke } from "../types/stroke";
+
+import useDrawing from "./useDrawing";
+import useEyedropper from "./useEyedropper";
 
 export default function useCanvas() {
-  const { tool, color, brushSize, opacity, strokes, addStroke, setStrokes } =
-    useCanvasStore();
+  const { tool, strokes } = useCanvasStore();
 
-  const [isDrawing, setIsDrawing] = useState(false);
+  const drawing = useDrawing();
+  const eyedropper = useEyedropper();
 
-  const startDrawing = (stage: Konva.Stage) => {
-    const point = stage.getPointerPosition();
+  const start = (stage: Konva.Stage) => {
+    if (tool === "eyedropper") {
+      eyedropper.pickColor(stage);
+      return;
+    }
 
-    if (!point) return;
-
-    const stroke: Stroke = {
-      id: crypto.randomUUID(),
-      tool,
-      color,
-      strokeWidth: brushSize,
-      opacity,
-      points: [point.x, point.y],
-    };
-
-    addStroke(stroke);
-
-    setIsDrawing(true);
-  };
-
-  const draw = (stage: Konva.Stage) => {
-    if (!isDrawing) return;
-
-    const point = stage.getPointerPosition();
-
-    if (!point) return;
-
-    const updated = [...strokes];
-
-    updated[updated.length - 1] = {
-      ...updated[updated.length - 1],
-      points: [...updated[updated.length - 1].points, point.x, point.y],
-    };
-
-    setStrokes(updated);
-  };
-
-  const endDrawing = () => {
-    setIsDrawing(false);
+    drawing.startDrawing(stage);
   };
 
   return {
     strokes,
-    startDrawing,
-    draw,
-    endDrawing,
+    startDrawing: start,
+    draw: drawing.draw,
+    endDrawing: drawing.endDrawing,
   };
 }
