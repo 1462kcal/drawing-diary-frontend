@@ -4,7 +4,7 @@ import { useCanvasStore } from "../store/canvasStore";
 import { rgbToHex } from "../utils/color";
 
 export default function useEyedropper() {
-  const { setColor, setTool } = useCanvasStore();
+  const { setColor, setTool, addRecentColor } = useCanvasStore();
 
   const pickColor = (stage: Konva.Stage) => {
     const pointer = stage.getPointerPosition();
@@ -33,6 +33,7 @@ export default function useEyedropper() {
     const color = rgbToHex(r, g, b);
 
     setColor(color);
+    addRecentColor(color);
 
     // 다시 펜으로 변경
     setTool("pen");

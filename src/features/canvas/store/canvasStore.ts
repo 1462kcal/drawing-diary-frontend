@@ -26,6 +26,9 @@ interface CanvasStore {
 
   undo: () => void;
   redo: () => void;
+
+  recentColors: string[];
+  addRecentColor: (color: string) => void;
 }
 
 export const useCanvasStore = create<CanvasStore>((set) => ({
@@ -113,6 +116,18 @@ export const useCanvasStore = create<CanvasStore>((set) => ({
       return {
         strokes: [...state.strokes, lastStroke],
         redoStack: state.redoStack.slice(0, -1),
+      };
+    }),
+
+  recentColors: [],
+
+  addRecentColor: (color) =>
+    set((state) => {
+      // 중복 제거
+      const colors = state.recentColors.filter((c) => c !== color);
+
+      return {
+        recentColors: [color, ...colors].slice(0, 16),
       };
     }),
 }));

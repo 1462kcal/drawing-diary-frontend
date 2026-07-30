@@ -1,23 +1,10 @@
-const colors = [
-  "#000000",
-  "#FFFFFF",
-  "#FF3B30",
-  "#FF9500",
-  "#FFCC00",
-  "#34C759",
-  "#30B0C7",
-  "#007AFF",
-  "#5856D6",
-  "#AF52DE",
-  "#FF2D55",
-  "#8E8E93",
-  "#C7C7CC",
-  "#A2845E",
-  "#7DCEA0",
-  "#AED6F1",
-];
+import { useCanvasStore } from "../store/canvasStore";
 
 export default function ColorPalette() {
+  const recentColors = useCanvasStore((state) => state.recentColors);
+
+  const setColor = useCanvasStore((state) => state.setColor);
+
   return (
     <div
       style={{
@@ -25,7 +12,7 @@ export default function ColorPalette() {
         padding: 10,
       }}
     >
-      <p style={{ marginBottom: 10 }}>컬러 팔레트</p>
+      <p style={{ marginBottom: 10 }}>최근 색상</p>
 
       <div
         style={{
@@ -34,18 +21,32 @@ export default function ColorPalette() {
           gap: 6,
         }}
       >
-        {colors.map((color) => (
-          <button
-            key={color}
-            style={{
-              width: 20,
-              height: 20,
-              border: "1px solid #aaa",
-              background: color,
-              cursor: "pointer",
-            }}
-          />
-        ))}
+        {Array.from({ length: 16 }).map((_, index) => {
+          const color = recentColors[index];
+
+          return (
+            <button
+              key={index}
+
+              onClick={() => {
+                if (color) {
+                  setColor(color);
+                }
+              }}
+
+              style={{
+                width: 20,
+                height: 20,
+
+                border: "1px solid #aaa",
+
+                background: color ?? "#eee",
+
+                cursor: color ? "pointer" : "default",
+              }}
+            />
+          );
+        })}
       </div>
     </div>
   );
