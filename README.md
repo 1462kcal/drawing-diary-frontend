@@ -19,9 +19,9 @@
 - [x] Toolbar
 - [x] Zustand Migration
 - [x] Undo / Redo
-- [ ] Pen
-- [ ] Eraser
-- [ ] Eyedropper
+- [x] Pen
+- [x] Eraser
+- [x] Eyedropper
 - [ ] Layer System
 - [ ] Realtime Sync
 - [ ] Yjs Integration
