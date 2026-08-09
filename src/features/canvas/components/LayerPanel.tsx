@@ -1,6 +1,11 @@
 import LayerItem from "./LayerItem";
 
+import { useCanvasStore } from "../store/canvasStore";
+
 export default function LayerPanel() {
+  const { layers, selectedLayerId, selectLayer, addLayer, removeLayer } =
+    useCanvasStore();
+
   return (
     <div
       style={{
@@ -17,18 +22,32 @@ export default function LayerPanel() {
           gap: 6,
         }}
       >
-        <LayerItem name="레이어 1" editable />
-
-        <LayerItem name="레이어 2" />
-
-        <LayerItem name="레이어 3" />
-
-        <LayerItem name="레이어 4" />
+        {layers.map((layer) => (
+          <LayerItem
+            key={layer.id}
+            name={layer.name}
+            selected={layer.id === selectedLayerId}
+            editable
+            onClick={() => selectLayer(layer.id)}
+            onDelete={() => removeLayer(layer.id)}
+          />
+        ))}
       </div>
 
       <button
+        onClick={addLayer}
         style={{
           marginTop: 12,
+          width: "100%",
+          padding: 10,
+        }}
+      >
+        + 레이어 추가
+      </button>
+
+      <button
+        style={{
+          marginTop: 6,
           width: "100%",
           padding: 10,
         }}
