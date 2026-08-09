@@ -4,7 +4,7 @@ import CanvasPage from "../pages/CanvasPage";
 
 export default function Router() {
   return (
-    <BrowserRouter>
+    <BrowserRouter basename="/drawing-diary-frontend/">
       <Routes>
         <Route path="/" element={<CanvasPage />} />
       </Routes>
