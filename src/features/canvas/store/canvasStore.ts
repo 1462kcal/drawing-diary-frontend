@@ -217,17 +217,16 @@ export const useCanvasStore = create<CanvasStore>((set) => {
       set((state) => {
         const index = state.layers.findIndex((layer) => layer.id === layerId);
 
-        // 이미 가장 위에 있음
-        if (index === state.layers.length - 1) {
+        if (index <= 0) {
           return state;
         }
 
         const newLayers = [...state.layers];
 
-        const temp = newLayers[index];
-
-        newLayers[index] = newLayers[index + 1];
-        newLayers[index + 1] = temp;
+        [newLayers[index - 1], newLayers[index]] = [
+          newLayers[index],
+          newLayers[index - 1],
+        ];
 
         return {
           layers: newLayers,
@@ -242,17 +241,16 @@ export const useCanvasStore = create<CanvasStore>((set) => {
       set((state) => {
         const index = state.layers.findIndex((layer) => layer.id === layerId);
 
-        // 이미 가장 아래에 있음
-        if (index === 0) {
+        if (index >= state.layers.length - 1) {
           return state;
         }
 
         const newLayers = [...state.layers];
 
-        const temp = newLayers[index];
-
-        newLayers[index] = newLayers[index - 1];
-        newLayers[index - 1] = temp;
+        [newLayers[index], newLayers[index + 1]] = [
+          newLayers[index + 1],
+          newLayers[index],
+        ];
 
         return {
           layers: newLayers,

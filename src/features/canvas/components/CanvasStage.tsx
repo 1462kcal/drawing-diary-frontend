@@ -46,25 +46,27 @@ export default function CanvasStage() {
         }}
         onPointerLeave={endDrawing}
       >
-        {layers.map((canvasLayer) => (
-          <Layer key={canvasLayer.id} visible={canvasLayer.visible}>
-            <Group opacity={canvasLayer.opacity / 100}>
-              {canvasLayer.strokes.map((stroke) => (
-                <Line
-                  key={stroke.id}
-                  points={stroke.points}
-                  stroke={stroke.color}
-                  strokeWidth={stroke.strokeWidth}
-                  opacity={stroke.opacity / 100}
-                  lineCap="round"
-                  lineJoin="round"
-                  tension={0.5}
-                  globalCompositeOperation={
-                    stroke.tool === "eraser" ? "destination-out" : "source-over"
-                  }
-                />
-              ))}
-            </Group>
+        {[...layers].reverse().map((canvasLayer) => (
+          <Layer
+            key={canvasLayer.id}
+            visible={canvasLayer.visible}
+            opacity={canvasLayer.opacity / 100}
+          >
+            {canvasLayer.strokes.map((stroke) => (
+              <Line
+                key={stroke.id}
+                points={stroke.points}
+                stroke={stroke.color}
+                strokeWidth={stroke.strokeWidth}
+                opacity={stroke.opacity / 100}
+                lineCap="round"
+                lineJoin="round"
+                tension={0.5}
+                globalCompositeOperation={
+                  stroke.tool === "eraser" ? "destination-out" : "source-over"
+                }
+              />
+            ))}
           </Layer>
         ))}
       </Stage>

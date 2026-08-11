@@ -46,8 +46,8 @@ export default function LayerPanel() {
             onDelete={() => removeLayer(layer.id)}
             onMoveUp={() => moveLayerUp(layer.id)}
             onMoveDown={() => moveLayerDown(layer.id)}
-            canMoveUp={index < layers.length - 1}
-            canMoveDown={index > 0}
+            canMoveUp={index > 0}
+            canMoveDown={index < layers.length - 1}
           />
         ))}
       </div>
