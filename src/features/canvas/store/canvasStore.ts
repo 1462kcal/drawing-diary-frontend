@@ -35,6 +35,12 @@ interface CanvasStore {
   removeLayer: (layerId: string) => void;
   selectLayer: (layerId: string) => void;
 
+  toggleLayerVisibility: (layerId: string) => void;
+  setLayerOpacity: (layerId: string, opacity: number) => void;
+
+  moveLayerUp: (layerId: string) => void;
+  moveLayerDown: (layerId: string) => void;
+
   // ===========================
   // Stroke
   // ===========================
@@ -64,7 +70,7 @@ const createLayer = (name: string): CanvasLayer => ({
   id: crypto.randomUUID(),
   name,
   visible: true,
-  locked: false,
+  opacity: 100,
   strokes: [],
 });
 
@@ -172,6 +178,88 @@ export const useCanvasStore = create<CanvasStore>((set) => {
       }),
 
     // ===========================
+    // Layer Visibility
+    // ===========================
+
+    toggleLayerVisibility: (layerId) =>
+      set((state) => ({
+        layers: state.layers.map((layer) =>
+          layer.id === layerId
+            ? {
+                ...layer,
+                visible: !layer.visible,
+              }
+            : layer,
+        ),
+      })),
+
+    // ===========================
+    // Layer Opacity
+    // ===========================
+
+    setLayerOpacity: (layerId, opacity) =>
+      set((state) => ({
+        layers: state.layers.map((layer) =>
+          layer.id === layerId
+            ? {
+                ...layer,
+                opacity,
+              }
+            : layer,
+        ),
+      })),
+
+    // ===========================
+    // Move Layer Up
+    // ===========================
+
+    moveLayerUp: (layerId) =>
+      set((state) => {
+        const index = state.layers.findIndex((layer) => layer.id === layerId);
+
+        // 이미 가장 위에 있음
+        if (index === state.layers.length - 1) {
+          return state;
+        }
+
+        const newLayers = [...state.layers];
+
+        const temp = newLayers[index];
+
+        newLayers[index] = newLayers[index + 1];
+        newLayers[index + 1] = temp;
+
+        return {
+          layers: newLayers,
+        };
+      }),
+
+    // ===========================
+    // Move Layer Down
+    // ===========================
+
+    moveLayerDown: (layerId) =>
+      set((state) => {
+        const index = state.layers.findIndex((layer) => layer.id === layerId);
+
+        // 이미 가장 아래에 있음
+        if (index === 0) {
+          return state;
+        }
+
+        const newLayers = [...state.layers];
+
+        const temp = newLayers[index];
+
+        newLayers[index] = newLayers[index - 1];
+        newLayers[index - 1] = temp;
+
+        return {
+          layers: newLayers,
+        };
+      }),
+
+    // ===========================
     // Stroke
     // ===========================
 
@@ -179,10 +267,6 @@ export const useCanvasStore = create<CanvasStore>((set) => {
       set((state) => {
         const updatedLayers = state.layers.map((layer) => {
           if (layer.id !== state.selectedLayerId) {
-            return layer;
-          }
-
-          if (layer.locked) {
             return layer;
           }
 
