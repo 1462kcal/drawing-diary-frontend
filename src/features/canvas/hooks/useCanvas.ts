@@ -6,7 +6,7 @@ import useDrawing from "./useDrawing";
 import useEyedropper from "./useEyedropper";
 
 export default function useCanvas() {
-  const { tool, strokes } = useCanvasStore();
+  const { tool, layers } = useCanvasStore();
 
   const drawing = useDrawing();
   const eyedropper = useEyedropper();
@@ -21,7 +21,8 @@ export default function useCanvas() {
   };
 
   return {
-    strokes,
+    layers,
+
     startDrawing: start,
     draw: drawing.draw,
     endDrawing: drawing.endDrawing,

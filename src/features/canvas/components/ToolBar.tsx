@@ -19,7 +19,7 @@ export default function Toolbar() {
     undo,
     redo,
 
-    strokes,
+    undoStack,
     redoStack,
   } = useCanvasStore();
 
@@ -44,13 +44,14 @@ export default function Toolbar() {
           background: "#fff",
         }}
       >
+        {/* Undo / Redo */}
         <div
           style={{
             display: "flex",
             gap: 6,
           }}
         >
-          <ToolButton onClick={undo} disabled={strokes.length === 0}>
+          <ToolButton onClick={undo} disabled={undoStack.length === 0}>
             <Undo2 size={18} />
           </ToolButton>
 
@@ -59,6 +60,7 @@ export default function Toolbar() {
           </ToolButton>
         </div>
 
+        {/* Drawing Tools */}
         <div
           style={{
             display: "grid",
