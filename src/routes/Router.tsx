@@ -9,6 +9,8 @@ export default function Router() {
     <BrowserRouter basename="/drawing-diary-frontend/">
       <Routes>
         <Route path="/" element={<HomePage />} />
+        <Route path="/popular" element={<HomePage />} />
+        <Route path="/ranking" element={<HomePage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/canvas" element={<CanvasPage />} />
       </Routes>

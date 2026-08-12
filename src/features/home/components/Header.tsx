@@ -1,39 +1,62 @@
+import { Link, useLocation } from "react-router-dom";
 import { Bell, Search, UserRound } from "lucide-react";
 
 export default function Header() {
+  const location = useLocation();
+
+  const currentPath = location.pathname;
+
   return (
     <header
       style={{
-        height: 64,
-        borderBottom: "1px solid #ddd",
+        height: 60,
         display: "flex",
         alignItems: "center",
-        padding: "0 32px",
-        gap: 32,
+        padding: "0 20px",
+        borderBottom: "1px solid #ddd",
         background: "#fff",
       }}
     >
-      {/* 로고 */}
-      <div
-        style={{
-          fontWeight: 700,
-          fontSize: 20,
-          marginRight: 20,
-        }}
-      >
-        그림일기
-      </div>
+      <div style={{ marginRight: 40 }}>로고</div>
 
-      {/* 메뉴 */}
       <nav
         style={{
           display: "flex",
           gap: 20,
         }}
       >
-        <button>피드</button>
-        <button>랭킹</button>
-        <button>탐색</button>
+        <Link
+          to="/"
+          style={{
+            textDecoration: "none",
+            color: currentPath === "/" ? "#222" : "#888",
+            fontWeight: currentPath === "/" ? 700 : 400,
+          }}
+        >
+          피드
+        </Link>
+
+        <Link
+          to="/popular"
+          style={{
+            textDecoration: "none",
+            color: currentPath === "/popular" ? "#222" : "#888",
+            fontWeight: currentPath === "/popular" ? 700 : 400,
+          }}
+        >
+          인기
+        </Link>
+
+        <Link
+          to="/ranking"
+          style={{
+            textDecoration: "none",
+            color: currentPath === "/ranking" ? "#222" : "#888",
+            fontWeight: currentPath === "/ranking" ? 700 : 400,
+          }}
+        >
+          랭킹
+        </Link>
       </nav>
 
       {/* 검색 */}
