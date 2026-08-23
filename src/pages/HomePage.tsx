@@ -9,8 +9,13 @@ import { getMyProfile } from "../features/home/services/homeService";
 import type { User } from "../features/home/types/user";
 import type { HomeTab } from "../features/home/types/home";
 
+import { useAuthStore } from "../features/auth/store/authStore";
+
 export default function HomePage() {
   const location = useLocation();
+
+  // authStore의 로그인 상태를 감지
+  const accessToken = useAuthStore((state) => state.accessToken);
 
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
@@ -26,7 +31,8 @@ export default function HomePage() {
 
       case "/":
       default:
-        return "feed";
+        // 로그인 여부에 따라 기본 탭 결정
+        return accessToken ? "feed" : "popular";
     }
   };
 
@@ -34,12 +40,21 @@ export default function HomePage() {
 
   useEffect(() => {
     const fetchProfile = async () => {
+      // 로그아웃 상태라면 프로필 요청할 필요 없음
+      if (!accessToken) {
+        setUser(null);
+        setLoading(false);
+        return;
+      }
+
       try {
+        setLoading(true);
+
         const data = await getMyProfile();
 
         setUser(data);
       } catch {
-        // 비로그인 상태
+        // 토큰이 없거나 만료된 경우
         setUser(null);
       } finally {
         setLoading(false);
@@ -47,7 +62,7 @@ export default function HomePage() {
     };
 
     fetchProfile();
-  }, []);
+  }, [accessToken]);
 
   return (
     <div
