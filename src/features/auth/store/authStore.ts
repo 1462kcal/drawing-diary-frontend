@@ -15,11 +15,13 @@ export const useAuthStore = create<AuthState>((set) => ({
 
   refreshToken: localStorage.getItem("refreshToken"),
 
-  userId: (() => {
-    const userId = localStorage.getItem("userId");
+  userId: localStorage.getItem("userId")
+    ? Number(localStorage.getItem("userId"))
+    : null,
 
-    return userId ? Number(userId) : null;
-  })(),
+  // =========================
+  // Login
+  // =========================
 
   login: (accessToken, refreshToken, userId) => {
     localStorage.setItem("accessToken", accessToken);
@@ -34,6 +36,10 @@ export const useAuthStore = create<AuthState>((set) => ({
       userId,
     });
   },
+
+  // =========================
+  // Logout
+  // =========================
 
   logout: () => {
     localStorage.removeItem("accessToken");

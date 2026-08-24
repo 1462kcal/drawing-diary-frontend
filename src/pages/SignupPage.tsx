@@ -2,16 +2,14 @@ import { useState } from "react";
 import type { FormEvent } from "react";
 import { useNavigate } from "react-router-dom";
 
-import { login } from "../features/auth/services/authService";
-import { useAuthStore } from "../features/auth/store/authStore";
+import { signup } from "../features/auth/services/authService";
 
-export default function LoginPage() {
+export default function SignupPage() {
   const navigate = useNavigate();
-
-  const loginUser = useAuthStore((state) => state.login);
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [nickname, setNickname] = useState("");
 
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
@@ -21,27 +19,28 @@ export default function LoginPage() {
 
     setError("");
 
-    if (!email || !password) {
-      setError("이메일과 비밀번호를 입력해주세요.");
+    if (!email || !password || !nickname) {
+      setError("이메일, 비밀번호, 닉네임을 모두 입력해주세요.");
       return;
     }
 
     try {
       setLoading(true);
 
-      const response = await login({
+      await signup({
         email,
         password,
+        nickname,
       });
 
-      loginUser(response.accessToken, response.refreshToken, response.userId);
+      alert("회원가입이 완료되었습니다.");
 
-      navigate("/");
+      navigate("/login");
     } catch (error) {
       console.error(error);
 
       setError(
-        error instanceof Error ? error.message : "로그인에 실패했습니다.",
+        error instanceof Error ? error.message : "회원가입에 실패했습니다.",
       );
     } finally {
       setLoading(false);
@@ -65,7 +64,7 @@ export default function LoginPage() {
           borderRadius: 12,
         }}
       >
-        <h1>로그인</h1>
+        <h1>회원가입</h1>
 
         <form
           onSubmit={handleSubmit}
@@ -90,6 +89,13 @@ export default function LoginPage() {
             onChange={(e) => setPassword(e.target.value)}
           />
 
+          <input
+            type="text"
+            placeholder="닉네임"
+            value={nickname}
+            onChange={(e) => setNickname(e.target.value)}
+          />
+
           {error && (
             <p
               style={{
@@ -102,19 +108,19 @@ export default function LoginPage() {
           )}
 
           <button type="submit" disabled={loading}>
-            {loading ? "로그인 중..." : "로그인"}
+            {loading ? "회원가입 중..." : "회원가입"}
           </button>
         </form>
 
         <button
           type="button"
-          onClick={() => navigate("/signup")}
+          onClick={() => navigate("/login")}
           style={{
             marginTop: 16,
             width: "100%",
           }}
         >
-          회원가입
+          로그인으로 돌아가기
         </button>
       </section>
     </main>

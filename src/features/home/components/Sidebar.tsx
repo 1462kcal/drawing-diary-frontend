@@ -1,5 +1,6 @@
 import ProfileSummary from "./ProfileSummary";
 import type { User } from "../types/user";
+import LogoutButton from "../../../components/common/LogoutButton";
 
 interface SidebarProps {
   user: User | null;
@@ -15,6 +16,17 @@ export default function Sidebar({ user, loading = false }: SidebarProps) {
       }}
     >
       <ProfileSummary user={user} loading={loading} />
+
+      {/* 로그인 상태에서만 로그아웃 버튼 표시 */}
+      {!loading && user && (
+        <div
+          style={{
+            marginTop: 12,
+          }}
+        >
+          <LogoutButton />
+        </div>
+      )}
     </aside>
   );
 }
