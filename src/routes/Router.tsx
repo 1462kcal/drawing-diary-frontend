@@ -4,6 +4,7 @@ import HomePage from "../pages/HomePage";
 import CanvasPage from "../pages/CanvasPage";
 import LoginPage from "../pages/LoginPage";
 import SignupPage from "../pages/SignupPage";
+import ProfilePage from "../pages/ProfilePage";
 
 export default function Router() {
   return (
@@ -15,6 +16,7 @@ export default function Router() {
         <Route path="/signup" element={<SignupPage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/canvas" element={<CanvasPage />} />
+        <Route path="/profile" element={<ProfilePage />} />
       </Routes>
     </BrowserRouter>
   );
