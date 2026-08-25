@@ -1,100 +1,72 @@
-import type { Profile } from "../types/profile";
+import { useNavigate } from "react-router-dom";
+
+import type { ProfileUser } from "../types/profile";
 
 interface ProfileHeaderProps {
-  profile: Profile;
-  followerCount: number;
-  followingCount: number;
-  onBack: () => void;
-  onEdit: () => void;
+  user: ProfileUser;
+  isFollowing: boolean;
+  onToggleFollow: () => void;
 }
 
 export default function ProfileHeader({
-  profile,
-  followerCount,
-  followingCount,
-  onBack,
-  onEdit,
+  user,
+  isFollowing,
+  onToggleFollow,
 }: ProfileHeaderProps) {
+  const navigate = useNavigate();
+
   return (
-    <section
+    <header
       style={{
-        maxWidth: 1200,
-        margin: "0 auto",
-        padding: "20px 32px",
+        height: 56,
+        borderBottom: "1px solid #222",
+        display: "flex",
+        alignItems: "center",
+        padding: "0 20px",
+        position: "relative",
       }}
     >
-      {/* 뒤로가기 */}
       <button
         type="button"
-        onClick={onBack}
+        onClick={() => navigate(-1)}
         style={{
           border: "none",
           background: "transparent",
+          fontSize: 28,
           cursor: "pointer",
-          fontSize: 20,
         }}
       >
-        ←
+        ‹
       </button>
 
-      {/* 프로필 */}
-      <div
+      <h1
         style={{
-          display: "flex",
-          alignItems: "center",
-          gap: 20,
-          marginTop: 20,
+          position: "absolute",
+          left: "50%",
+          transform: "translateX(-50%)",
+          margin: 0,
+          fontSize: 18,
+          fontWeight: 600,
         }}
       >
-        <img
-          src={profile.profileImageUrl ?? "/default-profile.png"}
-          alt="프로필 이미지"
-          style={{
-            width: 80,
-            height: 80,
-            borderRadius: "50%",
-            objectFit: "cover",
-          }}
-        />
+        {user.nickname}의 일기장
+      </h1>
 
-        <div>
-          <h1
-            style={{
-              margin: 0,
-              fontSize: 24,
-            }}
-          >
-            {profile.nickname}
-          </h1>
-
-          <div
-            style={{
-              display: "flex",
-              gap: 20,
-              marginTop: 10,
-            }}
-          >
-            <span>팔로워 {followerCount}</span>
-
-            <span>팔로잉 {followingCount}</span>
-          </div>
-        </div>
-
-        <button
-          type="button"
-          onClick={onEdit}
-          style={{
-            marginLeft: "auto",
-            padding: "8px 16px",
-            border: "1px solid #ccc",
-            borderRadius: 6,
-            background: "#fff",
-            cursor: "pointer",
-          }}
-        >
-          프로필 수정
-        </button>
-      </div>
-    </section>
+      <button
+        type="button"
+        onClick={onToggleFollow}
+        style={{
+          marginLeft: "auto",
+          padding: "9px 18px",
+          border: "none",
+          borderRadius: 6,
+          background: isFollowing ? "#eee" : "#222",
+          color: isFollowing ? "#222" : "#fff",
+          cursor: "pointer",
+        }}
+      >
+        {isFollowing ? "팔로잉" : "팔로우"}
+      </button>
+    </header>
   );
 }
