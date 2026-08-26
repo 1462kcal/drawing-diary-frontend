@@ -4,6 +4,7 @@ import HomePage from "../pages/HomePage";
 import CanvasPage from "../pages/CanvasPage";
 import LoginPage from "../pages/LoginPage";
 import SignupPage from "../pages/SignupPage";
+import ProfilePage from "../pages/ProfilePage";
 
 import ProtectedRoute from "./ProtectedRoute";
 import PublicRoute from "./PublicRoute";
@@ -24,6 +25,7 @@ export default function Router() {
           <Route path="/popular" element={<HomePage />} />
           <Route path="/ranking" element={<HomePage />} />
           <Route path="/canvas" element={<CanvasPage />} />
+          <Route path="/profile" element={<ProfilePage />} />
         </Route>
       </Routes>
     </BrowserRouter>
