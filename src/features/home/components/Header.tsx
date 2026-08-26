@@ -1,94 +1,104 @@
+import { Link, useLocation } from "react-router-dom";
 import { Bell, Search, UserRound } from "lucide-react";
 
 export default function Header() {
+  const location = useLocation();
+
+  const currentPath = location.pathname;
+
   return (
     <header
       style={{
-        height: 64,
+        height: 60,
         display: "flex",
         alignItems: "center",
-        padding: "0 32px",
-        borderBottom: "1px solid #E8E3DB",
-        background: "#FFFEFB",
-        boxSizing: "border-box",
+        padding: "0 20px",
+        borderBottom: "1px solid #ddd",
+        background: "#fff",
       }}
     >
-      <strong
+      <div style={{ marginRight: 40 }}>로고</div>
+
+      <nav
         style={{
-          fontSize: 18,
-          letterSpacing: "-0.02em",
-          color: "#34312D",
+          display: "flex",
+          gap: 20,
         }}
       >
-        drawing diary
-      </strong>
+        <Link
+          to="/"
+          style={{
+            textDecoration: "none",
+            color: currentPath === "/" ? "#222" : "#888",
+            fontWeight: currentPath === "/" ? 700 : 400,
+          }}
+        >
+          피드
+        </Link>
 
+        <Link
+          to="/popular"
+          style={{
+            textDecoration: "none",
+            color: currentPath === "/popular" ? "#222" : "#888",
+            fontWeight: currentPath === "/popular" ? 700 : 400,
+          }}
+        >
+          인기
+        </Link>
+
+        <Link
+          to="/ranking"
+          style={{
+            textDecoration: "none",
+            color: currentPath === "/ranking" ? "#222" : "#888",
+            fontWeight: currentPath === "/ranking" ? 700 : 400,
+          }}
+        >
+          랭킹
+        </Link>
+      </nav>
+
+      {/* 검색 */}
       <div
         style={{
           marginLeft: "auto",
-          display: "flex",
-          alignItems: "center",
-          gap: 8,
+          position: "relative",
+          width: 240,
         }}
       >
-        <div style={{ position: "relative", width: 220 }}>
-          <Search
-            size={16}
-            style={{
-              position: "absolute",
-              left: 12,
-              top: "50%",
-              transform: "translateY(-50%)",
-              color: "#9A938A",
-            }}
-          />
-          <input
-            type="text"
-            placeholder="일기 검색"
-            aria-label="일기 검색"
-            style={{
-              width: "100%",
-              boxSizing: "border-box",
-              padding: "9px 12px 9px 34px",
-              border: "1px solid #E3DED6",
-              borderRadius: 12,
-              outline: "none",
-              background: "#F7F4EF",
-              color: "#34312D",
-            }}
-          />
-        </div>
-
-        <button
-          aria-label="알림"
+        <Search
+          size={16}
           style={{
-            width: 40,
-            height: 40,
-            border: 0,
-            borderRadius: 12,
-            background: "transparent",
-            color: "#5F5A54",
-            cursor: "pointer",
+            position: "absolute",
+            left: 10,
+            top: "50%",
+            transform: "translateY(-50%)",
+            color: "#888",
           }}
-        >
-          <Bell size={19} />
-        </button>
+        />
 
-        <button
-          aria-label="프로필"
+        <input
+          type="text"
+          placeholder="Search"
           style={{
-            width: 40,
-            height: 40,
-            border: 0,
-            borderRadius: 12,
-            background: "#F0ECE5",
-            color: "#5F5A54",
-            cursor: "pointer",
+            width: "100%",
+            boxSizing: "border-box",
+            padding: "8px 10px 8px 32px",
+            border: "1px solid #ccc",
+            borderRadius: 6,
           }}
-        >
-          <UserRound size={19} />
-        </button>
+        />
       </div>
+
+      {/* 우측 아이콘 */}
+      <button>
+        <Bell size={18} />
+      </button>
+
+      <button>
+        <UserRound size={18} />
+      </button>
     </header>
   );
 }
