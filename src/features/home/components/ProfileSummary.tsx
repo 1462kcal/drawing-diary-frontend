@@ -1,4 +1,3 @@
-import { useNavigate } from "react-router-dom";
 import type { User } from "../types/user";
 
 interface ProfileSummaryProps {
@@ -10,166 +9,91 @@ export default function ProfileSummary({
   user,
   loading = false,
 }: ProfileSummaryProps) {
-  const navigate = useNavigate();
-
-  // 로그인 여부 확인 중
   if (loading) {
     return (
       <div
         style={{
-          padding: 16,
-          border: "1px solid #ddd",
-          borderRadius: 8,
-          background: "#fff",
-          textAlign: "center",
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          gap: 10,
         }}
       >
-        불러오는 중...
-      </div>
-    );
-  }
-
-  // 로그인하지 않은 경우
-  if (!user) {
-    return (
-      <div
-        style={{
-          padding: 20,
-          border: "1px solid #ddd",
-          borderRadius: 8,
-          background: "#fff",
-          textAlign: "center",
-        }}
-      >
-        {/* 프로필 아이콘 */}
         <div
           style={{
-            width: 56,
-            height: 56,
+            width: 64,
+            height: 64,
             borderRadius: "50%",
-            background: "#eee",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            margin: "0 auto 12px",
-            fontSize: 24,
+            backgroundColor: "#E8E3DB",
           }}
-        >
-          👤
-        </div>
+        />
 
-        <strong
+        <div
           style={{
-            display: "block",
-            marginBottom: 6,
-          }}
-        >
-          로그인하세요
-        </strong>
-
-        <p
-          style={{
-            margin: "0 0 16px",
-            fontSize: 13,
-            color: "#777",
-            lineHeight: 1.5,
-          }}
-        >
-          로그인하고
-          <br />
-          그림일기를 시작해보세요!
-        </p>
-
-        <button
-          onClick={() => navigate("/login")}
-          style={{
-            width: "100%",
-            padding: "9px 12px",
-            border: "none",
+            width: 70,
+            height: 16,
             borderRadius: 6,
-            background: "#222",
-            color: "#fff",
-            cursor: "pointer",
+            backgroundColor: "#E8E3DB",
           }}
-        >
-          로그인
-        </button>
+        />
       </div>
     );
   }
 
-  // 로그인한 경우
   return (
     <div
       style={{
-        border: "1px solid #ddd",
-        borderRadius: 8,
-        padding: 16,
-        background: "#fff",
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        gap: 10,
       }}
     >
-      {/* 프로필 */}
+      {/* Profile Image */}
       <div
         style={{
+          width: 64,
+          height: 64,
+          borderRadius: "50%",
+          overflow: "hidden",
+          backgroundColor: "#E8E3DB",
           display: "flex",
           alignItems: "center",
-          gap: 12,
+          justifyContent: "center",
         }}
       >
-        <div
-          style={{
-            width: 48,
-            height: 48,
-            borderRadius: "50%",
-            overflow: "hidden",
-            background: "#eee",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-          }}
-        >
-          {user.profileImageUrl ? (
-            <img
-              src={user.profileImageUrl}
-              alt="프로필"
-              style={{
-                width: "100%",
-                height: "100%",
-                objectFit: "cover",
-              }}
-            />
-          ) : (
-            "👤"
-          )}
-        </div>
-
-        <div>
-          <strong>{user.nickname}</strong>
-
-          <div
+        {user?.profileImageUrl ? (
+          <img
+            src={user.profileImageUrl}
+            alt={`${user.nickname} 프로필`}
             style={{
-              fontSize: 12,
-              color: "#777",
-              marginTop: 4,
+              width: "100%",
+              height: "100%",
+              objectFit: "cover",
+            }}
+          />
+        ) : (
+          <span
+            style={{
+              fontSize: 24,
+              color: "#8A847C",
             }}
           >
-            @{user.id}
-          </div>
-        </div>
+            ☺
+          </span>
+        )}
       </div>
 
-      {/* 메뉴 */}
-      <div
+      {/* Nickname */}
+      <span
         style={{
-          display: "flex",
-          gap: 8,
-          marginTop: 16,
+          fontSize: 15,
+          fontWeight: 700,
+          color: "#34312D",
         }}
       >
-        <button>일기쓰기</button>
-        <button>내 일기장</button>
-        <button>관리</button>
-      </div>
+        {user?.nickname ?? "로그인해주세요"}
+      </span>
     </div>
   );
 }
