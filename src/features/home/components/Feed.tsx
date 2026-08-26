@@ -5,8 +5,7 @@ const mockFeeds: FeedItem[] = [
     id: 1,
     nickname: "이케아연필도둑",
     profileImageUrl: null,
-    title:
-      "그림일기그림일기그림일기그림일기그림일기그림일기그림일기그림일기그림일기그림일기그림일기그림일기그림일기",
+    title: "오늘의 그림일기",
     content: "친구와 함께 그림을 그렸다.",
     imageUrl: null,
   },
@@ -15,8 +14,7 @@ const mockFeeds: FeedItem[] = [
     nickname: "모노쿠마",
     profileImageUrl: null,
     title: "우뿌뿌뿌",
-    content:
-      "우뿌뿌뿌뿌우뿌뿌뿌뿌우뿌뿌뿌뿌우뿌뿌뿌뿌우뿌뿌뿌뿌우뿌뿌뿌뿌우뿌뿌뿌뿌우뿌뿌뿌뿌우뿌뿌뿌뿌우뿌뿌뿌뿌우뿌뿌뿌뿌우뿌뿌뿌뿌우뿌뿌뿌뿌우뿌뿌뿌뿌",
+    content: "우뿌뿌ㅋㅋㅋㅋㅋㅋㅋ",
     imageUrl: null,
   },
   {
@@ -31,34 +29,22 @@ const mockFeeds: FeedItem[] = [
 
 export default function Feed() {
   return (
-    <section
-      style={{
-        display: "flex",
-        flexDirection: "column",
-        gap: 20,
-      }}
-    >
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "space-between",
-          alignItems: "center",
-        }}
-      >
-        <h2
-          style={{
-            margin: 0,
-          }}
-        >
-          피드
-        </h2>
+    <section>
+      <div className="home-section-header">
+        <div>
+          <h2 className="home-section-title">오늘의 그림일기 ☁️</h2>
 
-        <button>전체 보기</button>
+          <p className="home-section-description">
+            다른 사람들의 하루를 살펴보세요.
+          </p>
+        </div>
       </div>
 
-      {mockFeeds.map((feed) => (
-        <FeedCard key={feed.id} item={feed} />
-      ))}
+      <div className="home-feed">
+        {mockFeeds.map((feed) => (
+          <FeedCard key={feed.id} item={feed} />
+        ))}
+      </div>
     </section>
   );
 }

@@ -12,6 +12,8 @@ import type { HomeTab } from "../features/home/types/home";
 
 import { useAuthStore } from "../features/auth/store/authStore";
 
+import "../features/home/styles/home.css";
+
 export default function HomePage() {
   const location = useLocation();
 
@@ -52,7 +54,6 @@ export default function HomePage() {
         setUser(data);
       } catch (error) {
         console.error("프로필 조회 실패:", error);
-
         setUser(null);
       } finally {
         setLoading(false);
@@ -63,45 +64,21 @@ export default function HomePage() {
   }, [accessToken]);
 
   return (
-    <div
-      style={{
-        minHeight: "100vh",
+    <div className="home-page">
+      <div className="home-shell">
+        <Header />
 
-        backgroundColor: "#F5F2EC",
+        <div className="home-body">
+          <Sidebar user={user} loading={loading} />
 
-        color: "#34312D",
-      }}
-    >
-      {/* Header */}
-      <Header />
-
-      {/* Body */}
-      <div
-        style={{
-          display: "flex",
-
-          minHeight: "calc(100vh - 64px)",
-        }}
-      >
-        {/* Sidebar */}
-        <Sidebar user={user} loading={loading} />
-
-        {/* Content */}
-        <main
-          style={{
-            flex: 1,
-
-            minWidth: 0,
-
-            maxWidth: 980,
-
-            padding: "36px 48px 64px",
-
-            boxSizing: "border-box",
-          }}
-        >
-          {!loading && <HomeContent user={user} activeTab={activeTab} />}
-        </main>
+          <main className="home-content">
+            <div className="home-content-scroll">
+              <div className="home-content-inner">
+                {!loading && <HomeContent user={user} activeTab={activeTab} />}
+              </div>
+            </div>
+          </main>
+        </div>
       </div>
     </div>
   );

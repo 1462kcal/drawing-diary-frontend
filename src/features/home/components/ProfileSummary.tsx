@@ -11,29 +11,15 @@ export default function ProfileSummary({
 }: ProfileSummaryProps) {
   if (loading) {
     return (
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          gap: 10,
-        }}
-      >
-        <div
-          style={{
-            width: 64,
-            height: 64,
-            borderRadius: "50%",
-            backgroundColor: "#E8E3DB",
-          }}
-        />
+      <div className="home-profile">
+        <div className="home-profile-image" />
 
         <div
           style={{
-            width: 70,
-            height: 16,
-            borderRadius: 6,
-            backgroundColor: "#E8E3DB",
+            width: 64,
+            height: 14,
+            borderRadius: 8,
+            background: "#e8f5f8",
           }}
         />
       </div>
@@ -41,57 +27,16 @@ export default function ProfileSummary({
   }
 
   return (
-    <div
-      style={{
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        gap: 10,
-      }}
-    >
-      {/* Profile Image */}
-      <div
-        style={{
-          width: 64,
-          height: 64,
-          borderRadius: "50%",
-          overflow: "hidden",
-          backgroundColor: "#E8E3DB",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-        }}
-      >
+    <div className="home-profile">
+      <div className="home-profile-image">
         {user?.profileImageUrl ? (
-          <img
-            src={user.profileImageUrl}
-            alt={`${user.nickname} 프로필`}
-            style={{
-              width: "100%",
-              height: "100%",
-              objectFit: "cover",
-            }}
-          />
+          <img src={user.profileImageUrl} alt={`${user.nickname} 프로필`} />
         ) : (
-          <span
-            style={{
-              fontSize: 24,
-              color: "#8A847C",
-            }}
-          >
-            ☺
-          </span>
+          <span style={{ fontSize: 25 }}>🌷</span>
         )}
       </div>
 
-      {/* Nickname */}
-      <span
-        style={{
-          fontSize: 15,
-          fontWeight: 700,
-          color: "#34312D",
-        }}
-      >
+      <span className="home-profile-name">
         {user?.nickname ?? "로그인해주세요"}
       </span>
     </div>

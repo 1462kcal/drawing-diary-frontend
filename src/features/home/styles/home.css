@@ -1,0 +1,682 @@
+.home-page {
+  --sky: #bfeaf7;
+  --sky-soft: #e9f8fc;
+  --sky-deep: #65c5df;
+
+  --pink: #f3a6bc;
+  --pink-soft: #fde8ee;
+
+  --yellow: #ffdaa0;
+  --mint: #b5e4d2;
+
+  --white: #ffffff;
+  --surface: #fbfeff;
+  --surface-soft: #f5fbfd;
+
+  --text: #4d5961;
+  --text-soft: #8a979e;
+
+  --border: #e0f0f5;
+
+  min-height: 100vh;
+  color: var(--text);
+
+  background:
+    radial-gradient(
+      circle at 8% 12%,
+      rgba(255, 255, 255, 0.7) 0 60px,
+      transparent 61px
+    ),
+    radial-gradient(
+      circle at 90% 85%,
+      rgba(255, 255, 255, 0.5) 0 80px,
+      transparent 81px
+    ),
+    var(--sky);
+
+  font-family:
+    Pretendard,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    sans-serif;
+}
+
+/* =========================================
+   Main Shell
+========================================= */
+
+.home-shell {
+  width: min(1440px, calc(100% - 40px));
+  min-height: calc(100vh - 40px);
+
+  margin: 20px auto;
+
+  display: flex;
+  flex-direction: column;
+
+  overflow: hidden;
+
+  background: var(--white);
+
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  border-radius: 36px;
+
+  box-shadow:
+    0 20px 60px rgba(70, 170, 200, 0.16),
+    0 4px 16px rgba(70, 170, 200, 0.08);
+}
+
+/* =========================================
+   Header
+========================================= */
+
+.home-header {
+  height: 72px;
+  flex-shrink: 0;
+
+  display: flex;
+  align-items: center;
+
+  padding: 0 28px;
+
+  border-bottom: 1px solid var(--border);
+
+  background: rgba(255, 255, 255, 0.92);
+}
+
+.home-logo {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+
+  color: var(--text);
+
+  font-size: 19px;
+  font-weight: 800;
+  letter-spacing: -0.04em;
+}
+
+.home-logo-mark {
+  width: 32px;
+  height: 32px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 11px;
+
+  background: var(--sky-soft);
+  color: var(--sky-deep);
+
+  font-size: 16px;
+}
+
+/* =========================================
+   Search
+========================================= */
+
+.home-search {
+  position: relative;
+  width: 230px;
+}
+
+.home-search svg {
+  position: absolute;
+
+  left: 13px;
+  top: 50%;
+
+  transform: translateY(-50%);
+
+  color: var(--text-soft);
+}
+
+.home-search input {
+  width: 100%;
+  height: 40px;
+
+  box-sizing: border-box;
+
+  padding: 0 14px 0 38px;
+
+  border: 1px solid var(--border);
+  border-radius: 14px;
+
+  outline: none;
+
+  background: var(--surface-soft);
+
+  color: var(--text);
+
+  font-size: 13px;
+
+  transition:
+    border-color 0.15s ease,
+    background 0.15s ease;
+}
+
+.home-search input:focus {
+  border-color: #b8e5f0;
+  background: var(--white);
+}
+
+/* =========================================
+   Header Buttons
+========================================= */
+
+.home-icon-button {
+  width: 40px;
+  height: 40px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: none;
+  border-radius: 13px;
+
+  background: transparent;
+
+  color: var(--text-soft);
+
+  cursor: pointer;
+
+  transition:
+    background 0.15s ease,
+    color 0.15s ease;
+}
+
+.home-icon-button:hover {
+  background: var(--sky-soft);
+  color: var(--sky-deep);
+}
+
+/* =========================================
+   Body
+========================================= */
+
+.home-body {
+  display: flex;
+
+  flex: 1;
+  min-height: 0;
+
+  overflow: hidden;
+}
+
+/* =========================================
+   Sidebar
+========================================= */
+
+.home-sidebar {
+  width: 230px;
+  flex-shrink: 0;
+
+  height: 100%;
+  overflow-y: auto;
+
+  display: flex;
+  flex-direction: column;
+
+  padding: 28px 18px;
+
+  box-sizing: border-box;
+
+  border-right: 1px solid var(--border);
+
+  background: #fafdfe;
+}
+
+/* =========================================
+   Profile
+========================================= */
+
+.home-profile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  padding: 4px 0 24px;
+}
+
+.home-profile-image {
+  width: 68px;
+  height: 68px;
+
+  overflow: hidden;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: 4px solid var(--white);
+  border-radius: 50%;
+
+  background: var(--pink-soft);
+
+  box-shadow: 0 4px 14px rgba(243, 166, 188, 0.2);
+}
+
+.home-profile-image img {
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+}
+
+.home-profile-name {
+  margin-top: 11px;
+
+  color: var(--text);
+
+  font-size: 15px;
+  font-weight: 800;
+}
+
+/* =========================================
+   Navigation
+========================================= */
+
+.home-nav {
+  display: flex;
+  flex-direction: column;
+
+  gap: 5px;
+}
+
+.home-nav-group {
+  display: flex;
+  flex-direction: column;
+
+  gap: 5px;
+}
+
+.home-nav-divider {
+  height: 1px;
+
+  margin: 18px 8px;
+
+  background: var(--border);
+}
+
+.home-nav-item {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+
+  min-height: 44px;
+
+  padding: 0 13px;
+
+  box-sizing: border-box;
+
+  border-radius: 14px;
+
+  color: var(--text-soft);
+
+  text-decoration: none;
+
+  font-size: 14px;
+  font-weight: 600;
+
+  transition:
+    background 0.15s ease,
+    color 0.15s ease,
+    transform 0.15s ease;
+}
+
+.home-nav-item:hover {
+  background: var(--sky-soft);
+  color: var(--sky-deep);
+
+  transform: translateX(2px);
+}
+
+.home-nav-item.active {
+  background: #e4f7fc;
+  color: #4eb5d2;
+
+  font-weight: 800;
+}
+
+.home-nav-icon {
+  width: 21px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* =========================================
+   Create Diary Button
+========================================= */
+
+.home-create-button {
+  width: 100%;
+  height: 46px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+
+  margin-top: 26px;
+
+  border: none;
+  border-radius: 15px;
+
+  background: linear-gradient(135deg, #f3a6bc, #efa1b7);
+
+  color: white;
+
+  font-size: 13px;
+  font-weight: 800;
+
+  cursor: pointer;
+
+  box-shadow: 0 7px 16px rgba(243, 166, 188, 0.25);
+
+  transition:
+    transform 0.15s ease,
+    box-shadow 0.15s ease;
+}
+
+.home-create-button:hover {
+  transform: translateY(-2px);
+
+  box-shadow: 0 10px 20px rgba(243, 166, 188, 0.3);
+}
+
+/* =========================================
+   Main Content
+========================================= */
+
+.home-content {
+  flex: 1;
+  min-width: 0;
+  min-height: 0;
+
+  overflow: hidden;
+
+  padding: 0;
+
+  box-sizing: border-box;
+
+  background: #fbfeff;
+}
+
+.home-content-inner {
+  width: min(820px, 100%);
+
+  margin: 0 auto;
+}
+
+.home-content-scroll {
+  height: 100%;
+
+  overflow-y: auto;
+  overflow-x: hidden;
+
+  padding: 38px 46px 64px;
+
+  box-sizing: border-box;
+
+  scrollbar-width: thin;
+  scrollbar-color: #c8e8f0 transparent;
+}
+
+/* =========================================
+   Section Header
+========================================= */
+
+.home-section-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+
+  margin-bottom: 24px;
+}
+
+.home-section-title {
+  margin: 0;
+
+  color: var(--text);
+
+  font-size: 25px;
+  font-weight: 800;
+  letter-spacing: -0.04em;
+}
+
+.home-section-description {
+  margin: 7px 0 0;
+
+  color: var(--text-soft);
+
+  font-size: 13px;
+}
+
+/* =========================================
+   Feed
+========================================= */
+
+.home-feed {
+  display: flex;
+  flex-direction: column;
+
+  gap: 20px;
+}
+
+/* =========================================
+   Diary Card
+========================================= */
+
+.diary-card {
+  overflow: hidden;
+
+  border: 1px solid var(--border);
+  border-radius: 24px;
+
+  background: var(--white);
+
+  box-shadow: 0 8px 24px rgba(82, 171, 198, 0.07);
+
+  transition:
+    transform 0.18s ease,
+    box-shadow 0.18s ease;
+}
+
+.diary-card:hover {
+  transform: translateY(-3px);
+
+  box-shadow: 0 14px 32px rgba(82, 171, 198, 0.12);
+}
+
+.diary-card-header {
+  display: flex;
+  align-items: center;
+
+  gap: 11px;
+
+  padding: 18px 20px 14px;
+}
+
+.diary-card-avatar {
+  width: 38px;
+  height: 38px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  overflow: hidden;
+
+  border-radius: 50%;
+
+  background: var(--pink-soft);
+
+  color: var(--pink);
+}
+
+.diary-card-avatar img {
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+}
+
+.diary-card-author {
+  display: flex;
+  flex-direction: column;
+
+  gap: 2px;
+}
+
+.diary-card-author-name {
+  color: var(--text);
+
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.diary-card-date {
+  color: var(--text-soft);
+
+  font-size: 11px;
+}
+
+.diary-card-image {
+  width: calc(100% - 32px);
+  margin: 0 16px;
+
+  aspect-ratio: 4 / 3;
+
+  overflow: hidden;
+
+  border-radius: 19px;
+
+  background: linear-gradient(135deg, #edfaff, #fff2f6);
+}
+
+.diary-card-image img {
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+}
+
+.diary-card-placeholder {
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  color: #a7cbd5;
+
+  font-size: 28px;
+}
+
+.diary-card-body {
+  padding: 18px 20px 20px;
+}
+
+.diary-card-title {
+  margin: 0 0 7px;
+
+  color: var(--text);
+
+  font-size: 17px;
+  font-weight: 800;
+
+  line-height: 1.45;
+}
+
+.diary-card-content {
+  margin: 0;
+
+  color: var(--text-soft);
+
+  font-size: 13px;
+  line-height: 1.7;
+}
+
+/* =========================================
+   Responsive
+========================================= */
+
+@media (max-width: 800px) {
+  .home-shell {
+    width: min(1440px, calc(100% - 40px));
+    height: calc(100vh - 40px);
+    min-height: 0;
+
+    margin: 20px auto;
+
+    display: flex;
+    flex-direction: column;
+
+    overflow: hidden;
+
+    background: var(--white);
+
+    border: 1px solid rgba(255, 255, 255, 0.8);
+    border-radius: 36px;
+
+    box-shadow:
+      0 20px 60px rgba(70, 170, 200, 0.16),
+      0 4px 16px rgba(70, 170, 200, 0.08);
+  }
+
+  .home-sidebar {
+    width: 190px;
+  }
+
+  .home-content {
+    padding: 30px 24px 50px;
+  }
+
+  .home-search {
+    width: 170px;
+  }
+}
+
+@media (max-width: 640px) {
+  .home-header {
+    padding: 0 16px;
+  }
+
+  .home-sidebar {
+    width: 72px;
+    padding: 20px 10px;
+  }
+
+  .home-profile-name,
+  .home-nav-item span:not(.home-nav-icon),
+  .home-create-button span {
+    display: none;
+  }
+
+  .home-nav-item {
+    justify-content: center;
+    padding: 0;
+  }
+
+  .home-create-button {
+    font-size: 0;
+  }
+
+  .home-create-button svg {
+    width: 18px;
+  }
+
+  .home-content {
+    padding: 24px 14px 40px;
+  }
+
+  .home-section-title {
+    font-size: 21px;
+  }
+}
