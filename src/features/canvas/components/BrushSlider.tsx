@@ -14,23 +14,11 @@ export default function BrushSlider({
   onChange,
 }: BrushSliderProps) {
   return (
-    <div
-      style={{
-        display: "flex",
-        flexDirection: "column",
-        gap: 8,
-      }}
-    >
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "space-between",
-          fontSize: 13,
-        }}
-      >
+    <div className="brush-slider">
+      <div className="brush-slider-header">
         <span>{label}</span>
 
-        <span>{value}</span>
+        <span className="brush-slider-value">{value}</span>
       </div>
 
       <input

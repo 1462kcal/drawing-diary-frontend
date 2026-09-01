@@ -20,21 +20,9 @@ export default function LayerPanel() {
   const selectedLayer = layers.find((layer) => layer.id === selectedLayerId);
 
   return (
-    <div
-      style={{
-        border: "1px solid #ccc",
-        padding: 10,
-      }}
-    >
-      <p style={{ marginBottom: 10 }}>레이어</p>
-
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          gap: 6,
-        }}
-      >
+    <div className="layer-panel">
+      {/* 레이어 목록 */}
+      <div className="layer-list">
         {layers.map((layer, index) => (
           <LayerItem
             key={layer.id}
@@ -52,21 +40,11 @@ export default function LayerPanel() {
         ))}
       </div>
 
-      {/* 레이어 투명도 */}
+      {/* 선택된 레이어 설정 */}
       {selectedLayer && (
-        <div
-          style={{
-            marginTop: 14,
-          }}
-        >
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "space-between",
-              marginBottom: 6,
-            }}
-          >
-            <span>레이어 투명도</span>
+        <div className="layer-opacity">
+          <div className="layer-opacity-header">
+            <span>투명도</span>
 
             <span>{selectedLayer.opacity}%</span>
           </div>
@@ -79,32 +57,18 @@ export default function LayerPanel() {
             onChange={(e) =>
               setLayerOpacity(selectedLayer.id, Number(e.target.value))
             }
-            style={{
-              width: "100%",
-            }}
           />
         </div>
       )}
 
-      <button
-        onClick={addLayer}
-        style={{
-          marginTop: 12,
-          width: "100%",
-          padding: 10,
-        }}
-      >
+      {/* 레이어 추가 */}
+      <button className="canvas-action-button" onClick={addLayer}>
         + 레이어 추가
       </button>
 
-      <button
-        style={{
-          marginTop: 6,
-          width: "100%",
-          padding: 10,
-        }}
-      >
-        + AI 가이드 추가하기
+      {/* AI 가이드 */}
+      <button className="canvas-action-button canvas-ai-button">
+        ♡ AI 가이드 추가
       </button>
     </div>
   );

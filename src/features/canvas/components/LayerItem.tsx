@@ -44,130 +44,75 @@ export default function LayerItem({
 }: LayerItemProps) {
   return (
     <div
+      className={`layer-item ${selected ? "selected" : ""}`}
       onClick={onClick}
-      style={{
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "space-between",
-
-        border: selected ? "2px solid #000" : "1px solid #ccc",
-
-        padding: "8px 10px",
-
-        background: selected ? "#f0f0f0" : "#fff",
-
-        cursor: "pointer",
-      }}
     >
       {/* 왼쪽 */}
-      <div
-        style={{
-          display: "flex",
-          alignItems: "center",
-          gap: 8,
-        }}
-      >
-        {/* Visible */}
+      <div className="layer-item-main">
         <button
+          className="layer-icon-button"
           onClick={(e) => {
             e.stopPropagation();
             onToggleVisibility?.();
           }}
-          style={{
-            border: "none",
-            background: "transparent",
-            padding: 0,
-            cursor: "pointer",
-          }}
+          aria-label={visible ? "레이어 숨기기" : "레이어 보이기"}
         >
-          {visible ? <Eye size={16} /> : <EyeOff size={16} />}
+          {visible ? <Eye size={13} /> : <EyeOff size={13} />}
         </button>
 
-        {/* Thumbnail */}
-        <div
-          style={{
-            width: 20,
-            height: 20,
-            background: "#ddd",
-            border: "1px solid #ccc",
-          }}
-        />
+        <div className="layer-thumbnail" />
 
-        <span>{name}</span>
+        <span className="layer-name">{name}</span>
       </div>
 
       {/* 오른쪽 */}
-      <div
-        style={{
-          display: "flex",
-          alignItems: "center",
-          gap: 2,
-        }}
-      >
-        {/* 위로 */}
+      <div className="layer-item-actions">
         <button
+          className="layer-icon-button"
           onClick={(e) => {
             e.stopPropagation();
             onMoveUp?.();
           }}
           disabled={!canMoveUp}
-          style={{
-            border: "none",
-            background: "transparent",
-            cursor: canMoveUp ? "pointer" : "default",
-            opacity: canMoveUp ? 1 : 0.3,
-          }}
+          aria-label="레이어 위로 이동"
         >
-          <ChevronUp size={16} />
+          <ChevronUp size={12} />
         </button>
 
-        {/* 아래로 */}
         <button
+          className="layer-icon-button"
           onClick={(e) => {
             e.stopPropagation();
             onMoveDown?.();
           }}
           disabled={!canMoveDown}
-          style={{
-            border: "none",
-            background: "transparent",
-            cursor: canMoveDown ? "pointer" : "default",
-            opacity: canMoveDown ? 1 : 0.3,
-          }}
+          aria-label="레이어 아래로 이동"
         >
-          <ChevronDown size={16} />
+          <ChevronDown size={12} />
         </button>
 
-        {/* 이름 수정 */}
         {editable && (
           <button
+            className="layer-icon-button"
             onClick={(e) => {
               e.stopPropagation();
             }}
-            style={{
-              border: "none",
-              background: "transparent",
-              cursor: "pointer",
-            }}
+            aria-label="레이어 이름 수정"
           >
-            <Pencil size={16} />
+            <Pencil size={12} />
           </button>
         )}
 
-        {/* 삭제 */}
         {onDelete && (
           <button
+            className="layer-icon-button layer-delete-button"
             onClick={(e) => {
               e.stopPropagation();
               onDelete();
             }}
-            style={{
-              border: "none",
-              background: "transparent",
-              cursor: "pointer",
-            }}
+            aria-label="레이어 삭제"
           >
-            <Trash2 size={16} />
+            <Trash2 size={12} />
           </button>
         )}
       </div>

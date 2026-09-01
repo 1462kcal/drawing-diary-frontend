@@ -1,5 +1,5 @@
 import { PenLine } from "lucide-react";
-import { Link } from "react-router-dom"; // 👈 Link 추가
+import { Link } from "react-router-dom";
 
 import ProfileSummary from "./ProfileSummary";
 import HomeNavigation from "./HomeNavigation";
@@ -20,7 +20,6 @@ export default function Sidebar({ user, loading = false }: SidebarProps) {
 
       <HomeNavigation />
 
-      {/* button을 Link 컴포넌트로 변경 */}
       <Link to="/canvas" className="home-create-button">
         <PenLine size={16} />
         <span>그림일기 쓰기</span>
