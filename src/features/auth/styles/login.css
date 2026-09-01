@@ -1,0 +1,489 @@
+/* =========================================================
+   DRAWING DIARY
+   LOGIN
+   ========================================================= */
+
+.login-page {
+  --pink: #e7a9bc;
+  --pink-light: #f4ccd8;
+  --pink-pale: #fff4f7;
+  --pink-dark: #a66d80;
+
+  --cream: #fffdf9;
+  --text: #50484a;
+  --text-light: #8d8084;
+
+  --line: #918286;
+  --line-light: #d9cdd0;
+
+  min-height: 100vh;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  box-sizing: border-box;
+
+  padding: 20px;
+
+  background-color: #fffafa;
+
+  background-image: radial-gradient(#d8cdd0 0.55px, transparent 0.55px);
+
+  background-size: 5px 5px;
+
+  color: var(--text);
+
+  font-family: "Pretendard", "Malgun Gothic", sans-serif;
+}
+
+/* =========================================================
+   WINDOW
+   ========================================================= */
+
+.login-page .auth-window {
+  width: min(430px, 100%);
+
+  overflow: hidden;
+
+  border: 1px solid var(--line);
+
+  background: var(--cream);
+
+  box-shadow: 4px 4px 0 rgba(80, 72, 74, 0.12);
+}
+
+/* =========================================================
+   WINDOW HEADER
+   ========================================================= */
+
+.login-page .auth-window-header {
+  height: 34px;
+
+  display: flex;
+
+  align-items: center;
+
+  padding: 0 9px;
+
+  box-sizing: border-box;
+
+  border-bottom: 1px solid var(--line);
+
+  background: repeating-linear-gradient(
+    to bottom,
+    #f3c7d4 0,
+    #f3c7d4 2px,
+    #e9aabd 2px,
+    #e9aabd 4px
+  );
+}
+
+.login-page .auth-window-controls {
+  display: flex;
+
+  gap: 4px;
+}
+
+.login-page .auth-window-controls span {
+  width: 9px;
+  height: 9px;
+
+  display: block;
+
+  box-sizing: border-box;
+
+  border: 1px solid var(--line);
+
+  background: #fff5f7;
+}
+
+.login-page .auth-window-title {
+  position: absolute;
+
+  left: 50%;
+
+  transform: translateX(-50%);
+
+  color: #694f58;
+
+  font-family: "Courier New", monospace;
+
+  font-size: 8px;
+
+  font-weight: 700;
+}
+
+.login-page .auth-window-spacer {
+  flex: 1;
+}
+
+/* =========================================================
+   CONTENT
+   ========================================================= */
+
+.login-page .auth-content {
+  padding: 38px 42px 32px;
+}
+
+/* =========================================================
+   LOGO
+   ========================================================= */
+
+.login-page .auth-logo {
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+
+  text-align: center;
+
+  margin-bottom: 28px;
+}
+
+.login-page .auth-logo-mark {
+  width: 46px;
+  height: 46px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  margin-bottom: 11px;
+
+  border: 1px solid var(--line);
+
+  background: var(--pink-pale);
+
+  color: var(--pink);
+
+  font-family: serif;
+
+  font-size: 23px;
+}
+
+.login-page .auth-logo h1 {
+  margin: 0;
+
+  color: var(--text);
+
+  font-family: "Courier New", monospace;
+
+  font-size: 17px;
+
+  font-weight: 700;
+
+  letter-spacing: -0.05em;
+}
+
+.login-page .auth-logo p {
+  margin: 7px 0 0;
+
+  color: var(--text-light);
+
+  font-size: 8px;
+
+  line-height: 1.8;
+}
+
+/* =========================================================
+   SECTION LABEL
+   ========================================================= */
+
+.login-page .auth-section-label {
+  margin-bottom: 8px;
+
+  color: var(--pink-dark);
+
+  font-family: "Courier New", monospace;
+
+  font-size: 7px;
+
+  font-weight: 700;
+
+  letter-spacing: 0.1em;
+}
+
+.login-page .auth-section-label::before {
+  content: "▶ ";
+
+  color: var(--pink);
+}
+
+/* =========================================================
+   FORM
+   ========================================================= */
+
+.login-page .auth-form {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 11px;
+}
+
+/* =========================================================
+   FIELD
+   ========================================================= */
+
+.login-page .auth-field {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 5px;
+}
+
+.login-page .auth-field > span {
+  color: var(--text-light);
+
+  font-family: "Courier New", monospace;
+
+  font-size: 6px;
+
+  font-weight: 700;
+}
+
+.login-page .auth-field input {
+  width: 100%;
+
+  height: 38px;
+
+  padding: 0 11px;
+
+  box-sizing: border-box;
+
+  outline: none;
+
+  border: 1px solid var(--line-light);
+
+  border-radius: 0;
+
+  background: #fffaf8;
+
+  color: var(--text);
+
+  font-family: "Pretendard", "Malgun Gothic", sans-serif;
+
+  font-size: 10px;
+
+  transition:
+    border-color 0.12s ease,
+    background 0.12s ease;
+}
+
+.login-page .auth-field input::placeholder {
+  color: #b4a8ac;
+
+  font-size: 9px;
+}
+
+.login-page .auth-field input:focus {
+  border-color: var(--pink-dark);
+
+  background: #fff5f7;
+}
+
+.login-page .auth-field input:disabled {
+  opacity: 0.6;
+
+  cursor: default;
+}
+
+/* =========================================================
+   ERROR
+   ========================================================= */
+
+.login-page .auth-error {
+  margin: 1px 0 0;
+
+  padding: 7px 9px;
+
+  box-sizing: border-box;
+
+  border: 1px dashed #c8959f;
+
+  background: #fff3f5;
+
+  color: #b15e6e;
+
+  font-family: "Courier New", monospace;
+
+  font-size: 7px;
+
+  line-height: 1.6;
+}
+
+/* =========================================================
+   SUBMIT
+   ========================================================= */
+
+.login-page .auth-submit-button {
+  width: 100%;
+
+  height: 39px;
+
+  margin-top: 5px;
+
+  border: 1px solid var(--line);
+
+  border-radius: 0;
+
+  background: var(--text);
+
+  color: #fff;
+
+  font-family: "Courier New", monospace;
+
+  font-size: 9px;
+
+  font-weight: 700;
+
+  cursor: pointer;
+
+  box-shadow: 2px 2px 0 rgba(80, 72, 74, 0.15);
+
+  transition:
+    transform 0.1s ease,
+    background 0.1s ease;
+}
+
+.login-page .auth-submit-button:hover:not(:disabled) {
+  background: var(--pink-dark);
+}
+
+.login-page .auth-submit-button:active:not(:disabled) {
+  transform: translate(1px, 1px);
+
+  box-shadow: none;
+}
+
+.login-page .auth-submit-button:disabled {
+  opacity: 0.55;
+
+  cursor: default;
+}
+
+/* =========================================================
+   DIVIDER
+   ========================================================= */
+
+.login-page .auth-divider {
+  display: flex;
+
+  align-items: center;
+
+  gap: 8px;
+
+  margin: 22px 0 18px;
+}
+
+.login-page .auth-divider span {
+  flex: 1;
+
+  height: 1px;
+
+  border-top: 1px dashed var(--line-light);
+}
+
+.login-page .auth-divider small {
+  color: #afa1a5;
+
+  font-family: "Courier New", monospace;
+
+  font-size: 6px;
+}
+
+/* =========================================================
+   SIGNUP
+   ========================================================= */
+
+.login-page .auth-signup {
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: 5px;
+
+  color: var(--text-light);
+
+  font-size: 8px;
+}
+
+.login-page .auth-signup button {
+  padding: 0;
+
+  border: none;
+
+  background: transparent;
+
+  color: var(--text);
+
+  font-family: "Courier New", monospace;
+
+  font-size: 8px;
+
+  font-weight: 700;
+
+  cursor: pointer;
+}
+
+.login-page .auth-signup button:hover {
+  color: var(--pink-dark);
+
+  text-decoration: underline;
+}
+
+/* =========================================================
+   FOOTER
+   ========================================================= */
+
+.login-page .auth-footer {
+  height: 25px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 0 9px;
+
+  box-sizing: border-box;
+
+  border-top: 1px solid var(--line);
+
+  background: repeating-linear-gradient(
+    to bottom,
+    #f3c7d4 0,
+    #f3c7d4 2px,
+    #e9aabd 2px,
+    #e9aabd 4px
+  );
+
+  color: #684e57;
+
+  font-family: "Courier New", monospace;
+
+  font-size: 6px;
+}
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 520px) {
+  .login-page {
+    padding: 10px;
+  }
+
+  .login-page .auth-content {
+    padding: 32px 24px 27px;
+  }
+
+  .login-page .auth-logo {
+    margin-bottom: 24px;
+  }
+}

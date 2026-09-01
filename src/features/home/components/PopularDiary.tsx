@@ -11,7 +11,7 @@ const mockPopularDiaries = [
     nickname: "모노쿠마",
     title: "우뿌뿌뿌",
     content:
-      "우뿌뿌뿌뿌우뿌뿌뿌뿌우뿌뿌뿌뿌우뿌뿌뿌뿌우뿌뿌뿌뿌우뿌뿌뿌뿌우뿌뿌뿌뿌우뿌뿌뿌뿌우뿌뿌뿌뿌우뿌뿌뿌뿌우뿌뿌뿌뿌우뿌뿌뿌뿌우뿌뿌뿌뿌우뿌뿌뿌뿌",
+      "우뿌뿌뿌뿌우뿌뿌뿌뿌우뿌뿌뿌뿌우뿌뿌뿌뿌우뿌뿌뿌뿌우뿌뿌뿌뿌우뿌뿌뿌뿌우뿌뿌뿌뿌",
   },
   {
     id: 3,
@@ -23,62 +23,27 @@ const mockPopularDiaries = [
 
 export default function PopularDiary() {
   return (
-    <section>
-      <h2>인기 그림일기</h2>
+    <section className="popular-section">
+      <div className="popular-grid">
+        {mockPopularDiaries.map((diary, index) => (
+          <article key={diary.id} className="popular-card">
+            <div className="popular-card-number">0{index + 1}</div>
 
-      <div
-        style={{
-          display: "grid",
-          gridTemplateColumns: "repeat(3, 1fr)",
-          gap: 16,
-        }}
-      >
-        {mockPopularDiaries.map((diary) => (
-          <article
-            key={diary.id}
-            style={{
-              border: "1px solid #ddd",
-              borderRadius: 8,
-              padding: 16,
-              background: "#fff",
-            }}
-          >
-            <div
-              style={{
-                height: 180,
-                background: "#f1f1f1",
-                borderRadius: 6,
-                marginBottom: 12,
-              }}
-            />
-
-            <div
-              style={{
-                fontSize: 12,
-                color: "#777",
-                marginBottom: 6,
-              }}
-            >
-              @{diary.nickname}
+            <div className="popular-card-image">
+              <span>♡</span>
             </div>
 
-            <h3
-              style={{
-                margin: "0 0 8px",
-              }}
-            >
-              {diary.title}
-            </h3>
+            <div className="popular-card-author">@{diary.nickname}</div>
 
-            <p
-              style={{
-                margin: 0,
-                color: "#666",
-                fontSize: 14,
-              }}
-            >
-              {diary.content}
-            </p>
+            <h3>{diary.title}</h3>
+
+            <p>{diary.content}</p>
+
+            <div className="popular-card-footer">
+              <span>♡ 24</span>
+
+              <span>read →</span>
+            </div>
           </article>
         ))}
       </div>

@@ -1,0 +1,487 @@
+/* =========================================================
+   DRAWING DIARY
+   SIGNUP
+   ========================================================= */
+
+.signup-page {
+  --pink: #e7a9bc;
+  --pink-light: #f4ccd8;
+  --pink-pale: #fff4f7;
+  --pink-dark: #a66d80;
+
+  --cream: #fffdf9;
+  --text: #50484a;
+  --text-light: #8d8084;
+
+  --line: #918286;
+  --line-light: #d9cdd0;
+
+  min-height: 100vh;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  box-sizing: border-box;
+
+  padding: 20px;
+
+  background-color: #fffafa;
+
+  background-image: radial-gradient(#d8cdd0 0.55px, transparent 0.55px);
+
+  background-size: 5px 5px;
+
+  color: var(--text);
+
+  font-family: "Pretendard", "Malgun Gothic", sans-serif;
+}
+
+/* =========================================================
+   WINDOW
+   ========================================================= */
+
+.signup-page .auth-window {
+  width: min(430px, 100%);
+
+  overflow: hidden;
+
+  border: 1px solid var(--line);
+
+  background: var(--cream);
+
+  box-shadow: 4px 4px 0 rgba(80, 72, 74, 0.12);
+}
+
+/* =========================================================
+   HEADER
+   ========================================================= */
+
+.signup-page .auth-window-header {
+  height: 34px;
+
+  display: flex;
+
+  align-items: center;
+
+  padding: 0 9px;
+
+  box-sizing: border-box;
+
+  border-bottom: 1px solid var(--line);
+
+  background: repeating-linear-gradient(
+    to bottom,
+    #f3c7d4 0,
+    #f3c7d4 2px,
+    #e9aabd 2px,
+    #e9aabd 4px
+  );
+}
+
+.signup-page .auth-window-controls {
+  display: flex;
+
+  gap: 4px;
+}
+
+.signup-page .auth-window-controls span {
+  width: 9px;
+  height: 9px;
+
+  display: block;
+
+  box-sizing: border-box;
+
+  border: 1px solid var(--line);
+
+  background: #fff5f7;
+}
+
+.signup-page .auth-window-title {
+  position: absolute;
+
+  left: 50%;
+
+  transform: translateX(-50%);
+
+  color: #694f58;
+
+  font-family: "Courier New", monospace;
+
+  font-size: 8px;
+
+  font-weight: 700;
+}
+
+.signup-page .auth-window-spacer {
+  flex: 1;
+}
+
+/* =========================================================
+   CONTENT
+   ========================================================= */
+
+.signup-page .auth-content {
+  padding: 32px 42px 27px;
+}
+
+/* =========================================================
+   LOGO
+   ========================================================= */
+
+.signup-page .auth-logo {
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+
+  text-align: center;
+
+  margin-bottom: 23px;
+}
+
+.signup-page .auth-logo-mark {
+  width: 43px;
+  height: 43px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  margin-bottom: 10px;
+
+  border: 1px solid var(--line);
+
+  background: var(--pink-pale);
+
+  color: var(--pink);
+
+  font-family: serif;
+
+  font-size: 21px;
+}
+
+.signup-page .auth-logo h1 {
+  margin: 0;
+
+  color: var(--text);
+
+  font-family: "Courier New", monospace;
+
+  font-size: 16px;
+
+  font-weight: 700;
+
+  letter-spacing: -0.05em;
+}
+
+.signup-page .auth-logo p {
+  margin: 6px 0 0;
+
+  color: var(--text-light);
+
+  font-size: 8px;
+
+  line-height: 1.8;
+}
+
+/* =========================================================
+   LABEL
+   ========================================================= */
+
+.signup-page .auth-section-label {
+  margin-bottom: 8px;
+
+  color: var(--pink-dark);
+
+  font-family: "Courier New", monospace;
+
+  font-size: 7px;
+
+  font-weight: 700;
+
+  letter-spacing: 0.1em;
+}
+
+.signup-page .auth-section-label::before {
+  content: "✦ ";
+
+  color: var(--pink);
+}
+
+/* =========================================================
+   FORM
+   ========================================================= */
+
+.signup-page .auth-form {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 10px;
+}
+
+/* =========================================================
+   FIELD
+   ========================================================= */
+
+.signup-page .auth-field {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 5px;
+}
+
+.signup-page .auth-field > span {
+  color: var(--text-light);
+
+  font-family: "Courier New", monospace;
+
+  font-size: 6px;
+
+  font-weight: 700;
+}
+
+.signup-page .auth-field input {
+  width: 100%;
+
+  height: 36px;
+
+  padding: 0 11px;
+
+  box-sizing: border-box;
+
+  outline: none;
+
+  border: 1px solid var(--line-light);
+
+  border-radius: 0;
+
+  background: #fffaf8;
+
+  color: var(--text);
+
+  font-family: "Pretendard", "Malgun Gothic", sans-serif;
+
+  font-size: 10px;
+
+  transition:
+    border-color 0.12s ease,
+    background 0.12s ease;
+}
+
+.signup-page .auth-field input::placeholder {
+  color: #b4a8ac;
+
+  font-size: 9px;
+}
+
+.signup-page .auth-field input:focus {
+  border-color: var(--pink-dark);
+
+  background: #fff5f7;
+}
+
+.signup-page .auth-field input:disabled {
+  opacity: 0.6;
+}
+
+/* =========================================================
+   ERROR
+   ========================================================= */
+
+.signup-page .auth-error {
+  margin: 1px 0 0;
+
+  padding: 7px 9px;
+
+  box-sizing: border-box;
+
+  border: 1px dashed #c8959f;
+
+  background: #fff3f5;
+
+  color: #b15e6e;
+
+  font-family: "Courier New", monospace;
+
+  font-size: 7px;
+
+  line-height: 1.6;
+}
+
+/* =========================================================
+   SUBMIT
+   ========================================================= */
+
+.signup-page .auth-submit-button {
+  width: 100%;
+
+  height: 38px;
+
+  margin-top: 5px;
+
+  border: 1px solid var(--line);
+
+  border-radius: 0;
+
+  background: var(--text);
+
+  color: #fff;
+
+  font-family: "Courier New", monospace;
+
+  font-size: 9px;
+
+  font-weight: 700;
+
+  cursor: pointer;
+
+  box-shadow: 2px 2px 0 rgba(80, 72, 74, 0.15);
+
+  transition:
+    transform 0.1s ease,
+    background 0.1s ease;
+}
+
+.signup-page .auth-submit-button:hover:not(:disabled) {
+  background: var(--pink-dark);
+}
+
+.signup-page .auth-submit-button:active:not(:disabled) {
+  transform: translate(1px, 1px);
+
+  box-shadow: none;
+}
+
+.signup-page .auth-submit-button:disabled {
+  opacity: 0.55;
+
+  cursor: default;
+}
+
+/* =========================================================
+   DIVIDER
+   ========================================================= */
+
+.signup-page .auth-divider {
+  display: flex;
+
+  align-items: center;
+
+  gap: 8px;
+
+  margin: 19px 0 16px;
+}
+
+.signup-page .auth-divider span {
+  flex: 1;
+
+  height: 1px;
+
+  border-top: 1px dashed var(--line-light);
+}
+
+.signup-page .auth-divider small {
+  color: #afa1a5;
+
+  font-family: "Courier New", monospace;
+
+  font-size: 6px;
+}
+
+/* =========================================================
+   LOGIN
+   ========================================================= */
+
+.signup-page .auth-signup {
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: 5px;
+
+  color: var(--text-light);
+
+  font-size: 8px;
+}
+
+.signup-page .auth-signup button {
+  padding: 0;
+
+  border: none;
+
+  background: transparent;
+
+  color: var(--text);
+
+  font-family: "Courier New", monospace;
+
+  font-size: 8px;
+
+  font-weight: 700;
+
+  cursor: pointer;
+}
+
+.signup-page .auth-signup button:hover {
+  color: var(--pink-dark);
+
+  text-decoration: underline;
+}
+
+/* =========================================================
+   FOOTER
+   ========================================================= */
+
+.signup-page .auth-footer {
+  height: 25px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 0 9px;
+
+  box-sizing: border-box;
+
+  border-top: 1px solid var(--line);
+
+  background: repeating-linear-gradient(
+    to bottom,
+    #f3c7d4 0,
+    #f3c7d4 2px,
+    #e9aabd 2px,
+    #e9aabd 4px
+  );
+
+  color: #684e57;
+
+  font-family: "Courier New", monospace;
+
+  font-size: 6px;
+}
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 520px) {
+  .signup-page {
+    padding: 10px;
+  }
+
+  .signup-page .auth-content {
+    padding: 28px 24px 25px;
+  }
+
+  .signup-page .auth-logo {
+    margin-bottom: 20px;
+  }
+}

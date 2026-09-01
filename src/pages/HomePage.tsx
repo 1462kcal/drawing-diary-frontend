@@ -54,6 +54,7 @@ export default function HomePage() {
         setUser(data);
       } catch (error) {
         console.error("프로필 조회 실패:", error);
+
         setUser(null);
       } finally {
         setLoading(false);
@@ -65,20 +66,22 @@ export default function HomePage() {
 
   return (
     <div className="home-page">
-      <div className="home-shell">
+      <div className="home-window">
         <Header />
 
-        <div className="home-body">
+        <div className="home-layout">
           <Sidebar user={user} loading={loading} />
 
-          <main className="home-content">
-            <div className="home-content-scroll">
-              <div className="home-content-inner">
-                {!loading && <HomeContent user={user} activeTab={activeTab} />}
-              </div>
-            </div>
+          <main className="home-main">
+            {!loading && <HomeContent user={user} activeTab={activeTab} />}
           </main>
         </div>
+
+        <footer className="home-footer">
+          <span>♡ shared diary</span>
+
+          <span>drawing diary community</span>
+        </footer>
       </div>
     </div>
   );

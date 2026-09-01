@@ -1,8 +1,6 @@
-import { PenLine } from "lucide-react";
-import { Link } from "react-router-dom";
-
 import ProfileSummary from "./ProfileSummary";
 import HomeNavigation from "./HomeNavigation";
+import { Link } from "react-router-dom";
 
 import type { User } from "../types/user";
 
@@ -18,20 +16,17 @@ export default function Sidebar({ user, loading = false }: SidebarProps) {
     <aside className="home-sidebar">
       <ProfileSummary user={user} loading={loading} />
 
-      <HomeNavigation />
+      <div className="sidebar-navigation">
+        <HomeNavigation />
+      </div>
 
-      <Link to="/canvas" className="home-create-button">
-        <PenLine size={16} />
-        <span>그림일기 쓰기</span>
+      <Link to="/canvas" className="create-diary-button">
+        <span>✦</span>
+        그림일기 쓰기
       </Link>
 
       {!loading && user && (
-        <div
-          style={{
-            marginTop: "auto",
-            paddingTop: 20,
-          }}
-        >
+        <div className="sidebar-logout">
           <LogoutButton />
         </div>
       )}

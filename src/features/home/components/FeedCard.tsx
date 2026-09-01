@@ -9,42 +9,63 @@ export interface FeedItem {
 
 interface FeedCardProps {
   item: FeedItem;
+  index?: number;
 }
 
-export default function FeedCard({ item }: FeedCardProps) {
+export default function FeedCard({ item, index = 0 }: FeedCardProps) {
   return (
-    <article className="diary-card">
-      {/* Author */}
-      <div className="diary-card-header">
-        <div className="diary-card-avatar">
-          {item.profileImageUrl ? (
-            <img src={item.profileImageUrl} alt="" />
+    <article className={`feed-card feed-card-${index % 3}`}>
+      <div className="feed-card-top">
+        <div className="feed-author">
+          <div className="feed-author-avatar">
+            {item.profileImageUrl ? (
+              <img src={item.profileImageUrl} alt="" />
+            ) : (
+              <span>♡</span>
+            )}
+          </div>
+
+          <div>
+            <strong>@{item.nickname}</strong>
+
+            <span>just posted</span>
+          </div>
+        </div>
+
+        <span className="feed-card-date">2026.08</span>
+      </div>
+
+      <div className="feed-card-paper">
+        <div className="feed-card-category"># 그림일기</div>
+
+        <h3>{item.title}</h3>
+
+        <div className="feed-image">
+          {item.imageUrl ? (
+            <img src={item.imageUrl} alt={item.title} />
           ) : (
-            <span>🌷</span>
+            <div className="empty-feed-image">
+              <span>♡</span>
+              <small>drawing diary</small>
+            </div>
           )}
         </div>
 
-        <div className="diary-card-author">
-          <span className="diary-card-author-name">{item.nickname}</span>
+        <p>{item.content}</p>
+      </div>
 
-          <span className="diary-card-date">오늘의 그림일기</span>
+      <div className="feed-card-bottom">
+        <div className="feed-reactions">
+          <button type="button" aria-label="좋아요">
+            ♡
+          </button>
+
+          <button type="button" aria-label="댓글">
+            ○
+          </button>
         </div>
-      </div>
 
-      {/* Image */}
-      <div className="diary-card-image">
-        {item.imageUrl ? (
-          <img src={item.imageUrl} alt={item.title} />
-        ) : (
-          <div className="diary-card-placeholder">☁️</div>
-        )}
-      </div>
-
-      {/* Content */}
-      <div className="diary-card-body">
-        <h3 className="diary-card-title">{item.title}</h3>
-
-        <p className="diary-card-content">{item.content}</p>
+        <span>view diary →</span>
       </div>
     </article>
   );

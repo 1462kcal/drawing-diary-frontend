@@ -11,19 +11,57 @@ interface HomeContentProps {
   activeTab: HomeTab;
 }
 
+const tabInfo = {
+  feed: {
+    label: "COMMUNITY",
+    title: "Feed",
+    description: "오늘 내 친구들은...",
+  },
+  popular: {
+    label: "POPULAR",
+    title: "popular diaries",
+    description: "이건 좋아요한 일기로 수정해라",
+  },
+  ranking: {
+    label: "RANKING",
+    title: "ranking",
+    description: "이번 주 인기 그림일기",
+  },
+};
+
 export default function HomeContent({ user, activeTab }: HomeContentProps) {
   const isLoggedIn = !!user;
 
+  const info = tabInfo[activeTab];
+
   return (
-    <section>
-      {/* 피드 */}
-      {activeTab === "feed" && <>{isLoggedIn ? <Feed /> : <LoginRequired />}</>}
+    <section className="home-content">
+      <header className="home-content-header">
+        <div>
+          <div className="home-section-label">{info.label}</div>
 
-      {/* 인기 일기 */}
-      {activeTab === "popular" && <PopularDiary />}
+          <h1>{info.title}</h1>
 
-      {/* 랭킹 */}
-      {activeTab === "ranking" && <RankingPreview />}
+          <p>{info.description}</p>
+        </div>
+
+        <div className="community-status">
+          <span className="status-dot" />
+          ONLINE
+        </div>
+      </header>
+
+      <div className="home-tab-display"></div>
+
+      <div className="home-content-scroll">
+        {activeTab === "feed" && (
+          <>{isLoggedIn ? <Feed /> : <LoginRequired />}</>
+        )}
+
+        {activeTab === "popular" && <PopularDiary />}
+
+        {activeTab === "ranking" && <RankingPreview />}
+      </div>
     </section>
   );
 }

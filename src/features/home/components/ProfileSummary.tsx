@@ -11,34 +11,49 @@ export default function ProfileSummary({
 }: ProfileSummaryProps) {
   if (loading) {
     return (
-      <div className="home-profile">
-        <div className="home-profile-image" />
+      <section className="sidebar-profile">
+        <div className="retro-titlebar">
+          <span>MY SPACE</span>
 
-        <div
-          style={{
-            width: 64,
-            height: 14,
-            borderRadius: 8,
-            background: "#e8f5f8",
-          }}
-        />
-      </div>
+          <div className="retro-window-buttons">
+            <span />
+            <span />
+          </div>
+        </div>
+
+        <div className="sidebar-profile-body">
+          <div className="profile-avatar skeleton" />
+
+          <div className="profile-name-skeleton" />
+        </div>
+      </section>
     );
   }
 
   return (
-    <div className="home-profile">
-      <div className="home-profile-image">
-        {user?.profileImageUrl ? (
-          <img src={user.profileImageUrl} alt={`${user.nickname} 프로필`} />
-        ) : (
-          <span style={{ fontSize: 25 }}>🌷</span>
-        )}
+    <section className="sidebar-profile">
+      <div className="retro-titlebar">
+        <span>MY SPACE</span>
+
+        <div className="retro-window-buttons">
+          <span />
+          <span />
+        </div>
       </div>
 
-      <span className="home-profile-name">
-        {user?.nickname ?? "로그인해주세요"}
-      </span>
-    </div>
+      <div className="sidebar-profile-body">
+        <div className="profile-avatar">
+          {user?.profileImageUrl ? (
+            <img src={user.profileImageUrl} alt={`${user.nickname} 프로필`} />
+          ) : (
+            <span>♡</span>
+          )}
+        </div>
+
+        <div className="profile-user-name">{user?.nickname ?? "guest"}</div>
+
+        {!user && <div className="profile-login-message">로그인해주세요</div>}
+      </div>
+    </section>
   );
 }
