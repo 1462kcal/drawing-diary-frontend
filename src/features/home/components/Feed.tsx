@@ -32,7 +32,7 @@ const mockFeeds: FeedItem[] = [
 export default function Feed() {
   return (
     <section className="feed-section">
-      <div className="feed-section-header">
+      {/* <div className="feed-section-header">
         <div>
           <span className="feed-small-label">LATEST POSTS</span>
 
@@ -42,7 +42,7 @@ export default function Feed() {
         <button type="button" className="text-button">
           전체 보기 →
         </button>
-      </div>
+      </div> */}
 
       <div className="feed-list">
         {mockFeeds.map((feed, index) => (
