@@ -13,6 +13,7 @@ export default function ProfileMini({ user }: ProfileMiniProps) {
         <div className="retro-buttons">
           <span />
           <span />
+          <span />
         </div>
       </div>
 

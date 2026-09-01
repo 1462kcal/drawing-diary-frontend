@@ -25,9 +25,6 @@ export default function DiaryPage({ diary }: DiaryPageProps) {
 
   return (
     <article className="diary-page">
-      {/* 종이 접힌 모서리 */}
-      <div className="paper-fold" />
-
       {/* 날짜 */}
       <div className="diary-date">{formattedDate}</div>
 

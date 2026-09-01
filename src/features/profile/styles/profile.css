@@ -1,3 +1,8 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
 .profile-page {
   --pink-main: #e8a8bd;
   --pink-light: #f4c8d5;
@@ -96,45 +101,79 @@
   letter-spacing: 0.02em;
 }
 
-/* 왼쪽 작은 버튼 */
+/* =========================================================
+   윈도우 컨트롤 버튼
+   ========================================================= */
 
 .window-controls {
   position: absolute;
-  left: 5px;
+  right: 5px;
+  top: 50%;
 
   display: flex;
-  gap: 3px;
+  align-items: center;
+
+  gap: 0;
+
+  transform: translateY(-50%);
 }
 
+/* — □ × 버튼 */
 .window-controls span {
-  width: 9px;
-  height: 7px;
+  position: relative;
+
+  width: 18px;
+  height: 16px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
   box-sizing: border-box;
 
   border: 1px solid var(--border);
 
+  background: #ffffff;
+
+  color: var(--text);
+
+  font-family: Arial, sans-serif;
+  font-size: 10px;
+  line-height: 1;
+
+  cursor: default;
+}
+
+/* 최소화 — */
+.window-controls span:nth-child(1)::before {
+  content: "-";
+
+  position: relative;
+  top: -1px;
+}
+
+/* 최대화 □ */
+.window-controls span:nth-child(2)::before {
+  content: "□";
+
+  font-size: 9px;
+}
+
+/* 닫기 × */
+.window-controls span:nth-child(3)::before {
+  content: "×";
+
+  font-size: 12px;
+}
+
+/* hover */
+.window-controls span:hover {
   background: var(--pink-pale);
 }
 
-/* 오른쪽 작은 버튼 */
-
-.window-control-right {
-  position: absolute;
-  right: 5px;
-}
-
-.window-control-right span {
-  display: block;
-
-  width: 9px;
-  height: 7px;
-
-  box-sizing: border-box;
-
-  border: 1px solid var(--border);
-
-  background: var(--pink-pale);
+/* 눌렀을 때 */
+.window-controls span:active {
+  background: var(--pink-light);
 }
 
 /* =========================================================

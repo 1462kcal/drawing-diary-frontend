@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 import ProfileMini from "../features/profile/components/ProfileMini";
 import DiaryPage from "../features/profile/components/DiaryPage";
@@ -30,9 +31,11 @@ import "../features/profile/styles/profile.css";
  *
  * API 연동 확인할 때 false로 변경
  */
-const USE_MOCK_DATA = true;
+const USE_MOCK_DATA = false;
 
 export default function ProfilePage() {
+  const navigate = useNavigate();
+
   const [user, setUser] = useState<ProfileUser | null>(null);
   const [diaries, setDiaries] = useState<Diary[]>([]);
   const [categories, setCategories] = useState<Category[]>([]);
@@ -221,13 +224,14 @@ export default function ProfilePage() {
           <div className="window-controls">
             <span />
             <span />
+            <span
+              onClick={() => navigate(-1)}
+              style={{ cursor: "pointer" }}
+              title="닫기"
+            />
           </div>
 
-          <span className="window-title">{user.nickname}'s diary.</span>
-
-          <div className="window-control-right">
-            <span />
-          </div>
+          <span className="window-title">{user.nickname}'s diary</span>
         </header>
 
         {/* ========================================
