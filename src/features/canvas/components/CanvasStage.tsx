@@ -9,15 +9,7 @@ export default function CanvasStage() {
   const { layers, startDrawing, draw, endDrawing } = useCanvas();
 
   return (
-    <div
-      style={{
-        display: "flex",
-        justifyContent: "center",
-        marginTop: 20,
-        touchAction: "none",
-        userSelect: "none",
-      }}
-    >
+    <div className="canvas-stage-wrapper">
       <Stage
         width={1000}
         height={700}

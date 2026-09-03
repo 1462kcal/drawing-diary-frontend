@@ -29,59 +29,38 @@ const mockRanking = [
 
 export default function RankingPreview() {
   return (
-    <section>
-      <h2>그림일기 랭킹</h2>
+    <section className="ranking-section">
+      <div className="ranking-window">
+        <div className="ranking-window-header">
+          <span>THIS WEEK</span>
 
-      <div
-        style={{
-          border: "1px solid #ddd",
-          borderRadius: 8,
-          background: "#fff",
-        }}
-      >
-        {mockRanking.map((item) => (
-          <div
-            key={item.rank}
-            style={{
-              display: "flex",
-              alignItems: "center",
-              gap: 16,
-              padding: "14px 18px",
-              borderBottom: item.rank !== 5 ? "1px solid #eee" : "none",
-            }}
-          >
-            <strong
-              style={{
-                width: 24,
-              }}
+          <span>TOP 05</span>
+        </div>
+
+        <div className="ranking-list">
+          {mockRanking.map((item) => (
+            <article
+              key={item.rank}
+              className={`ranking-item ${item.rank <= 3 ? "top-ranking" : ""}`}
             >
-              {item.rank}
-            </strong>
-
-            <div
-              style={{
-                width: 40,
-                height: 40,
-                borderRadius: "50%",
-                background: "#eee",
-              }}
-            />
-
-            <div>
-              <strong>{item.title}</strong>
-
-              <div
-                style={{
-                  fontSize: 12,
-                  color: "#777",
-                  marginTop: 4,
-                }}
-              >
-                @{item.nickname}
+              <div className="ranking-number">
+                {String(item.rank).padStart(2, "0")}
               </div>
-            </div>
-          </div>
-        ))}
+
+              <div className="ranking-avatar">
+                {item.rank === 1 ? "♕" : "♡"}
+              </div>
+
+              <div className="ranking-info">
+                <h3>{item.title}</h3>
+
+                <span>@{item.nickname}</span>
+              </div>
+
+              <div className="ranking-arrow">→</div>
+            </article>
+          ))}
+        </div>
       </div>
     </section>
   );

@@ -9,93 +9,64 @@ export interface FeedItem {
 
 interface FeedCardProps {
   item: FeedItem;
+  index?: number;
 }
 
-export default function FeedCard({ item }: FeedCardProps) {
+export default function FeedCard({ item, index = 0 }: FeedCardProps) {
   return (
-    <article
-      style={{
-        border: "1px solid #ddd",
-        borderRadius: 8,
-        padding: 20,
-        background: "#fff",
-      }}
-    >
-      {/* 작성자 */}
-      <div
-        style={{
-          display: "flex",
-          alignItems: "center",
-          gap: 10,
-          marginBottom: 16,
-        }}
-      >
-        <div
-          style={{
-            width: 32,
-            height: 32,
-            borderRadius: "50%",
-            background: "#eee",
-            overflow: "hidden",
-          }}
-        >
-          {item.profileImageUrl && (
-            <img
-              src={item.profileImageUrl}
-              alt=""
-              style={{
-                width: "100%",
-                height: "100%",
-                objectFit: "cover",
-              }}
-            />
+    <article className={`feed-card feed-card-${index % 3}`}>
+      <div className="feed-card-top">
+        <div className="feed-author">
+          <div className="feed-author-avatar">
+            {item.profileImageUrl ? (
+              <img src={item.profileImageUrl} alt="" />
+            ) : (
+              <span>♡</span>
+            )}
+          </div>
+
+          <div>
+            <strong>@{item.nickname}</strong>
+
+            <span>just posted</span>
+          </div>
+        </div>
+
+        <span className="feed-card-date">2026.08</span>
+      </div>
+
+      <div className="feed-card-paper">
+        <div className="feed-card-category"># 그림일기</div>
+
+        <h3>{item.title}</h3>
+
+        <div className="feed-image">
+          {item.imageUrl ? (
+            <img src={item.imageUrl} alt={item.title} />
+          ) : (
+            <div className="empty-feed-image">
+              <span>♡</span>
+              <small>drawing diary</small>
+            </div>
           )}
         </div>
 
-        <strong>{item.nickname}</strong>
+        <p>{item.content}</p>
       </div>
 
-      {/* 이미지 */}
-      <div
-        style={{
-          width: "100%",
-          aspectRatio: "4 / 3",
-          background: "#f1f1f1",
-          borderRadius: 6,
-          overflow: "hidden",
-        }}
-      >
-        {item.imageUrl && (
-          <img
-            src={item.imageUrl}
-            alt={item.title}
-            style={{
-              width: "100%",
-              height: "100%",
-              objectFit: "cover",
-            }}
-          />
-        )}
+      <div className="feed-card-bottom">
+        <div className="feed-reactions">
+          <button type="button" aria-label="좋아요">
+            ♡
+          </button>
+
+          <button type="button" aria-label="댓글">
+            ○
+          </button>
+        </div>
+
+        <span>view diary →</span>
       </div>
-
-      {/* 내용 */}
-      <h3
-        style={{
-          marginTop: 16,
-          marginBottom: 8,
-        }}
-      >
-        {item.title}
-      </h3>
-
-      <p
-        style={{
-          margin: 0,
-          color: "#666",
-        }}
-      >
-        {item.content}
-      </p>
     </article>
   );
 }

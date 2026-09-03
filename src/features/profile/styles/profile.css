@@ -1,0 +1,1225 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+.profile-page {
+  --pink-main: #e8a8bd;
+  --pink-light: #f4c8d5;
+  --pink-pale: #fff3f6;
+  --pink-dark: #9a6878;
+
+  --paper: #fffdf9;
+  --paper-line: #eadfe1;
+
+  --border: #806f73;
+  --border-light: #b9a5aa;
+
+  --text: #55494d;
+  --text-light: #8c7b81;
+
+  min-height: 100vh;
+  box-sizing: border-box;
+  padding: 10px;
+
+  color: var(--text);
+
+  background-color: #fffafa;
+
+  background-image: radial-gradient(
+    rgba(120, 100, 108, 0.14) 0.55px,
+    transparent 0.55px
+  );
+
+  background-size: 4px 4px;
+
+  font-family: "Pretendard", "Malgun Gothic", Arial, sans-serif;
+
+  image-rendering: pixelated;
+}
+
+/* =========================================================
+   전체 프로그램 창
+   ========================================================= */
+
+.profile-window {
+  width: min(1400px, 100%);
+  height: calc(100vh - 20px);
+  min-height: 680px;
+
+  margin: 0 auto;
+
+  display: flex;
+  flex-direction: column;
+
+  overflow: hidden;
+
+  box-sizing: border-box;
+
+  border: 1px solid var(--border);
+
+  background: #ffffff;
+
+  box-shadow: 2px 2px 0 rgba(128, 111, 115, 0.25);
+}
+
+/* =========================================================
+   최상단 윈도우 타이틀바
+   ========================================================= */
+
+.profile-window-header {
+  position: relative;
+
+  height: 24px;
+  flex-shrink: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  box-sizing: border-box;
+
+  border-bottom: 1px solid var(--border);
+
+  background: repeating-linear-gradient(
+    to bottom,
+    #f4c8d5 0px,
+    #f4c8d5 2px,
+    #e8a8bd 2px,
+    #e8a8bd 3px
+  );
+
+  user-select: none;
+}
+
+.window-title {
+  color: #684f57;
+
+  font-family: "Courier New", monospace;
+
+  font-size: 10px;
+  letter-spacing: 0.02em;
+}
+
+/* =========================================================
+   윈도우 컨트롤 버튼
+   ========================================================= */
+
+.window-controls {
+  position: absolute;
+  right: 5px;
+  top: 50%;
+
+  display: flex;
+  align-items: center;
+
+  gap: 0;
+
+  transform: translateY(-50%);
+}
+
+/* — □ × 버튼 */
+.window-controls span {
+  position: relative;
+
+  width: 18px;
+  height: 16px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  box-sizing: border-box;
+
+  border: 1px solid var(--border);
+
+  background: #ffffff;
+
+  color: var(--text);
+
+  font-family: Arial, sans-serif;
+  font-size: 10px;
+  line-height: 1;
+
+  cursor: default;
+}
+
+/* 최소화 — */
+.window-controls span:nth-child(1)::before {
+  content: "-";
+
+  position: relative;
+  top: -1px;
+}
+
+/* 최대화 □ */
+.window-controls span:nth-child(2)::before {
+  content: "□";
+
+  font-size: 9px;
+}
+
+/* 닫기 × */
+.window-controls span:nth-child(3)::before {
+  content: "×";
+
+  font-size: 12px;
+}
+
+/* hover */
+.window-controls span:hover {
+  background: var(--pink-pale);
+}
+
+/* 눌렀을 때 */
+.window-controls span:active {
+  background: var(--pink-light);
+}
+
+/* =========================================================
+   3단 레이아웃
+   ========================================================= */
+
+.profile-layout {
+  flex: 1;
+
+  min-height: 0;
+
+  display: grid;
+
+  /*
+   * 왼쪽 프로필
+   * 가운데 일기
+   * 오른쪽 달력/카테고리
+   */
+  grid-template-columns:
+    210px
+    minmax(0, 1fr)
+    210px;
+
+  overflow: hidden;
+
+  background: radial-gradient(
+    rgba(120, 100, 108, 0.13) 0.55px,
+    transparent 0.55px
+  );
+
+  background-size: 4px 4px;
+}
+
+/* =========================================================
+   왼쪽
+   ========================================================= */
+
+.profile-left {
+  min-width: 0;
+
+  box-sizing: border-box;
+
+  padding: 16px;
+
+  border-right: 1px solid var(--border);
+
+  overflow-y: auto;
+}
+
+/* =========================================================
+   가운데
+   ========================================================= */
+
+.profile-center {
+  min-width: 0;
+  min-height: 0;
+
+  box-sizing: border-box;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 28px;
+
+  overflow: auto;
+}
+
+/* =========================================================
+   오른쪽
+   ========================================================= */
+
+.profile-right {
+  min-width: 0;
+
+  box-sizing: border-box;
+
+  display: flex;
+  flex-direction: column;
+
+  gap: 16px;
+
+  padding: 16px;
+
+  border-left: 1px solid var(--border);
+
+  overflow-y: auto;
+}
+
+/* =========================================================
+   공통 작은 윈도우
+   ========================================================= */
+
+.retro-panel,
+.profile-mini {
+  border: 1px solid var(--border);
+
+  background: var(--paper);
+
+  box-shadow: 2px 2px 0 rgba(128, 111, 115, 0.16);
+}
+
+/* =========================================================
+   작은 윈도우 타이틀바
+   ========================================================= */
+
+.retro-titlebar {
+  height: 22px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  box-sizing: border-box;
+
+  padding: 0 5px;
+
+  border-bottom: 1px solid var(--border);
+
+  background: repeating-linear-gradient(
+    to bottom,
+    #f4c8d5 0px,
+    #f4c8d5 2px,
+    #e8a8bd 2px,
+    #e8a8bd 3px
+  );
+
+  color: #684f57;
+
+  font-family: "Courier New", monospace;
+
+  font-size: 9px;
+  font-weight: bold;
+}
+
+/* 작은 창 우측 버튼 */
+
+.retro-buttons {
+  display: flex;
+  gap: 3px;
+}
+
+.retro-buttons span {
+  width: 8px;
+  height: 7px;
+
+  box-sizing: border-box;
+
+  border: 1px solid var(--border);
+
+  background: var(--pink-pale);
+}
+
+/* =========================================================
+   PROFILE MINI
+   ========================================================= */
+
+.profile-mini {
+  width: 100%;
+
+  box-sizing: border-box;
+}
+
+.profile-mini-content {
+  padding: 18px 13px 15px;
+
+  text-align: center;
+}
+
+/* 프로필 이미지 */
+
+.profile-mini-avatar {
+  width: 82px;
+  height: 82px;
+
+  margin: 3px auto 13px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  overflow: hidden;
+
+  box-sizing: border-box;
+
+  border: 1px solid var(--border);
+
+  background: var(--pink-pale);
+
+  box-shadow: 2px 2px 0 var(--pink-main);
+}
+
+.profile-mini-avatar img {
+  width: 100%;
+  height: 100%;
+
+  display: block;
+
+  object-fit: cover;
+}
+
+.profile-avatar-placeholder {
+  color: var(--pink-main);
+
+  font-family: serif;
+
+  font-size: 32px;
+}
+
+/* 닉네임 */
+
+.profile-mini-name {
+  margin: 0;
+
+  color: var(--text);
+
+  font-family: "Courier New", monospace;
+
+  font-size: 14px;
+  font-weight: bold;
+
+  word-break: break-all;
+}
+
+/* 바이오 */
+
+.profile-mini-bio {
+  margin: 9px 0 0;
+
+  color: var(--text-light);
+
+  font-size: 10px;
+
+  line-height: 1.65;
+
+  word-break: keep-all;
+}
+
+/* 점선 */
+
+.profile-mini-divider {
+  height: 1px;
+
+  margin: 16px 0;
+
+  background: repeating-linear-gradient(
+    to right,
+    var(--border-light) 0,
+    var(--border-light) 3px,
+    transparent 3px,
+    transparent 6px
+  );
+}
+
+/* 프로필 메타 */
+
+.profile-mini-meta {
+  display: flex;
+  flex-direction: column;
+
+  gap: 8px;
+
+  text-align: left;
+}
+
+.profile-mini-meta div {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  font-family: "Courier New", monospace;
+
+  font-size: 8px;
+}
+
+.profile-mini-meta span {
+  color: var(--text-light);
+}
+
+.profile-mini-meta strong {
+  color: var(--text);
+
+  font-size: 8px;
+}
+
+/* =========================================================
+   가운데 일기장
+   ========================================================= */
+
+.diary-book {
+  width: min(720px, 100%);
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  gap: 12px;
+}
+
+/* =========================================================
+   일기 종이
+   ========================================================= */
+
+.diary-page {
+  position: relative;
+
+  width: 100%;
+
+  min-height: 570px;
+
+  box-sizing: border-box;
+
+  padding: 42px 58px 48px;
+
+  overflow: hidden;
+
+  border: 1px solid var(--border);
+
+  background-color: var(--paper);
+
+  /*
+   * 노트 줄
+   */
+  background-image: repeating-linear-gradient(
+    to bottom,
+    transparent 0,
+    transparent 28px,
+    var(--paper-line) 29px,
+    transparent 30px
+  );
+
+  box-shadow: 3px 3px 0 rgba(128, 111, 115, 0.22);
+
+  transform: rotate(-0.15deg);
+}
+
+/* =========================================================
+   종이 접힌 부분
+   ========================================================= */
+
+.paper-fold {
+  position: absolute;
+
+  top: -1px;
+  right: -1px;
+
+  width: 34px;
+  height: 34px;
+
+  background: #ffffff;
+
+  border-left: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+
+  clip-path: polygon(0 0, 100% 100%, 0 100%);
+}
+
+/* =========================================================
+   일기 날짜
+   ========================================================= */
+
+.diary-date {
+  margin-bottom: 7px;
+
+  color: var(--text-light);
+
+  font-family: "Courier New", monospace;
+
+  font-size: 9px;
+
+  letter-spacing: 0.05em;
+}
+
+/* =========================================================
+   일기 제목
+   ========================================================= */
+
+.diary-title {
+  margin: 0;
+
+  color: var(--text);
+
+  font-family: "Courier New", monospace;
+
+  font-size: 23px;
+
+  line-height: 1.35;
+
+  letter-spacing: -0.04em;
+
+  word-break: keep-all;
+}
+
+/* =========================================================
+   카테고리
+   ========================================================= */
+
+.diary-category {
+  display: inline-block;
+
+  margin-top: 9px;
+
+  padding: 2px 6px;
+
+  border: 1px solid var(--border-light);
+
+  background: var(--pink-pale);
+
+  color: var(--text-light);
+
+  font-family: "Courier New", monospace;
+
+  font-size: 8px;
+}
+
+/* =========================================================
+   일기 이미지
+   ========================================================= */
+
+.diary-image-wrapper {
+  width: min(100%, 430px);
+
+  margin: 28px auto 25px;
+
+  padding: 8px;
+
+  box-sizing: border-box;
+
+  border: 1px solid var(--border);
+
+  background: #ffffff;
+
+  box-shadow: 1px 1px 0 rgba(128, 111, 115, 0.18);
+
+  transform: rotate(0.35deg);
+}
+
+.diary-image {
+  width: 100%;
+
+  max-height: 270px;
+
+  display: block;
+
+  object-fit: contain;
+}
+
+/* 이미지가 없을 때 */
+
+.diary-image-placeholder {
+  width: min(100%, 430px);
+  height: 220px;
+
+  margin: 28px auto 25px;
+
+  box-sizing: border-box;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  gap: 8px;
+
+  border: 1px dashed var(--border-light);
+
+  background: repeating-linear-gradient(
+    45deg,
+    rgba(232, 168, 189, 0.07),
+    rgba(232, 168, 189, 0.07) 4px,
+    transparent 4px,
+    transparent 8px
+  );
+
+  color: var(--pink-main);
+}
+
+.diary-image-placeholder span {
+  font-family: serif;
+
+  font-size: 29px;
+}
+
+.diary-image-placeholder small {
+  color: var(--text-light);
+
+  font-family: "Courier New", monospace;
+
+  font-size: 8px;
+}
+
+/* =========================================================
+   일기 본문
+   ========================================================= */
+
+.diary-content {
+  margin-top: 18px;
+
+  font-size: 12px;
+
+  line-height: 2;
+
+  white-space: pre-wrap;
+
+  word-break: keep-all;
+}
+
+.diary-content p {
+  margin: 0;
+}
+
+.diary-content-empty {
+  color: var(--text-light);
+
+  font-size: 10px;
+}
+
+/* =========================================================
+   공개 여부
+   ========================================================= */
+
+.diary-visibility {
+  position: absolute;
+
+  right: 22px;
+  bottom: 17px;
+
+  color: var(--text-light);
+
+  font-family: "Courier New", monospace;
+
+  font-size: 7px;
+}
+
+/* =========================================================
+   일기 없음
+   ========================================================= */
+
+.diary-page-empty {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.diary-empty-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  gap: 9px;
+
+  color: var(--text-light);
+
+  font-size: 11px;
+}
+
+.diary-empty-icon {
+  color: var(--pink-main);
+
+  font-family: serif;
+
+  font-size: 29px;
+}
+
+/* =========================================================
+   이전 / 다음
+   ========================================================= */
+
+.diary-navigator {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 20px;
+
+  font-family: "Courier New", monospace;
+
+  font-size: 9px;
+}
+
+.diary-nav-button {
+  width: 28px;
+  height: 21px;
+
+  padding: 0;
+
+  box-sizing: border-box;
+
+  border: 1px solid var(--border);
+
+  background: var(--pink-pale);
+
+  color: var(--text);
+
+  font-family: "Courier New", monospace;
+
+  font-size: 11px;
+
+  cursor: pointer;
+}
+
+.diary-nav-button:hover {
+  background: var(--pink-light);
+}
+
+.diary-nav-button:active {
+  transform: translate(1px, 1px);
+}
+
+.diary-page-number {
+  min-width: 55px;
+
+  color: var(--text-light);
+
+  text-align: center;
+}
+
+/* =========================================================
+   CALENDAR
+   ========================================================= */
+
+.calendar-panel {
+  width: 100%;
+}
+
+.calendar-content {
+  padding: 10px 8px 11px;
+}
+
+/* 달 이동 */
+
+.calendar-navigation {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  margin-bottom: 10px;
+
+  font-family: "Courier New", monospace;
+
+  font-size: 9px;
+}
+
+.calendar-navigation button {
+  width: 19px;
+  height: 17px;
+
+  padding: 0;
+
+  box-sizing: border-box;
+
+  border: 1px solid var(--border);
+
+  background: var(--pink-pale);
+
+  color: var(--text);
+
+  font-family: "Courier New", monospace;
+
+  font-size: 8px;
+
+  cursor: pointer;
+}
+
+.calendar-navigation button:hover {
+  background: var(--pink-light);
+}
+
+/* 요일 */
+
+.calendar-weekdays,
+.calendar-grid {
+  display: grid;
+
+  grid-template-columns: repeat(7, 1fr);
+}
+
+.calendar-weekdays {
+  margin-bottom: 3px;
+
+  color: var(--text-light);
+
+  font-family: "Courier New", monospace;
+
+  font-size: 6px;
+
+  text-align: center;
+}
+
+/* 날짜 */
+
+.calendar-day {
+  position: relative;
+
+  width: 100%;
+  height: 28px;
+
+  padding: 0;
+
+  border: none;
+
+  background: transparent;
+
+  color: var(--text);
+
+  font-family: "Courier New", monospace;
+
+  font-size: 8px;
+
+  cursor: default;
+}
+
+.calendar-day-muted {
+  color: #d4c8cb;
+}
+
+.calendar-day-has-diary {
+  cursor: pointer;
+
+  font-weight: bold;
+}
+
+.calendar-day-has-diary:hover {
+  background: var(--pink-light);
+}
+
+.calendar-day-selected {
+  background: var(--pink-main);
+}
+
+.calendar-day span {
+  position: relative;
+
+  z-index: 2;
+}
+
+/* 일기 작성 표시 */
+
+.calendar-diary-dot {
+  position: absolute;
+
+  left: 50%;
+  bottom: 3px;
+
+  width: 3px;
+  height: 3px;
+
+  display: block;
+
+  transform: translateX(-50%);
+
+  border-radius: 50%;
+
+  background: var(--pink-main);
+}
+
+.calendar-day-selected .calendar-diary-dot {
+  background: #ffffff;
+}
+
+/* 달력 설명 */
+
+.calendar-description {
+  display: flex;
+  align-items: center;
+
+  gap: 5px;
+
+  margin-top: 8px;
+
+  color: var(--text-light);
+
+  font-family: "Courier New", monospace;
+
+  font-size: 6px;
+}
+
+.calendar-description .calendar-diary-dot {
+  position: static;
+
+  transform: none;
+
+  flex-shrink: 0;
+}
+
+/* =========================================================
+   CATEGORY
+   ========================================================= */
+
+.category-panel {
+  width: 100%;
+}
+
+.category-content {
+  padding: 7px 5px 9px;
+}
+
+.category-item {
+  width: 100%;
+
+  display: flex;
+  align-items: center;
+
+  gap: 6px;
+
+  box-sizing: border-box;
+
+  padding: 6px 5px;
+
+  border: none;
+
+  background: transparent;
+
+  color: var(--text);
+
+  font-family: "Courier New", monospace;
+
+  font-size: 9px;
+
+  text-align: left;
+
+  cursor: pointer;
+}
+
+.category-item:hover {
+  background: var(--pink-pale);
+}
+
+.category-item-selected {
+  background: var(--pink-light);
+
+  font-weight: bold;
+}
+
+.category-arrow {
+  width: 9px;
+
+  flex-shrink: 0;
+
+  color: var(--pink-dark);
+
+  font-size: 7px;
+}
+
+/* =========================================================
+   하단 상태바
+   ========================================================= */
+
+.profile-window-footer {
+  height: 22px;
+
+  flex-shrink: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  box-sizing: border-box;
+
+  padding: 0 8px;
+
+  border-top: 1px solid var(--border);
+
+  background: repeating-linear-gradient(
+    to bottom,
+    #f4c8d5 0px,
+    #f4c8d5 2px,
+    #e8a8bd 2px,
+    #e8a8bd 3px
+  );
+
+  color: #684f57;
+
+  font-family: "Courier New", monospace;
+
+  font-size: 7px;
+}
+
+/* =========================================================
+   로딩 / 에러
+   ========================================================= */
+
+.profile-state {
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  color: var(--text-light);
+
+  font-family: "Courier New", monospace;
+
+  font-size: 10px;
+}
+
+/* =========================================================
+   Scrollbar
+   ========================================================= */
+
+.profile-page ::-webkit-scrollbar {
+  width: 7px;
+  height: 7px;
+}
+
+.profile-page ::-webkit-scrollbar-track {
+  background: var(--pink-pale);
+}
+
+.profile-page ::-webkit-scrollbar-thumb {
+  border: 1px solid var(--border);
+
+  background: var(--pink-light);
+}
+
+.profile-page ::-webkit-scrollbar-thumb:hover {
+  background: var(--pink-main);
+}
+
+/* =========================================================
+   Tablet
+   ========================================================= */
+
+@media (max-width: 1000px) {
+  .profile-layout {
+    grid-template-columns:
+      175px
+      minmax(0, 1fr)
+      175px;
+  }
+
+  .profile-left,
+  .profile-right {
+    padding: 10px;
+  }
+
+  .profile-center {
+    padding: 20px;
+  }
+
+  .diary-page {
+    padding: 35px 40px 42px;
+  }
+}
+
+/* =========================================================
+   작은 화면
+   ========================================================= */
+
+@media (max-width: 780px) {
+  .profile-window {
+    height: auto;
+
+    min-height: calc(100vh - 20px);
+  }
+
+  .profile-layout {
+    grid-template-columns:
+      165px
+      minmax(0, 1fr);
+
+    overflow: visible;
+  }
+
+  .profile-right {
+    display: none;
+  }
+
+  .profile-center {
+    min-height: 680px;
+  }
+}
+
+/* =========================================================
+   모바일
+   ========================================================= */
+
+@media (max-width: 580px) {
+  .profile-window {
+    height: auto;
+  }
+
+  .profile-layout {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .profile-left {
+    border-right: none;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .profile-mini-content {
+    display: grid;
+
+    grid-template-columns: 65px 1fr;
+
+    column-gap: 12px;
+
+    align-items: center;
+
+    text-align: left;
+  }
+
+  .profile-mini-avatar {
+    width: 65px;
+    height: 65px;
+
+    grid-row: span 2;
+
+    margin: 0;
+  }
+
+  .profile-mini-name {
+    align-self: end;
+  }
+
+  .profile-mini-bio {
+    align-self: start;
+
+    margin-top: 3px;
+  }
+
+  .profile-mini-divider,
+  .profile-mini-meta {
+    display: none;
+  }
+
+  .profile-center {
+    min-height: 620px;
+
+    padding: 15px;
+  }
+
+  .diary-page {
+    min-height: 530px;
+
+    padding: 30px 24px 35px;
+  }
+
+  .diary-title {
+    font-size: 19px;
+  }
+
+  .diary-content {
+    font-size: 11px;
+  }
+}

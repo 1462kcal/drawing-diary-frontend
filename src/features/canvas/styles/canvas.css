@@ -1,0 +1,1762 @@
+.canvas-page {
+  --pink-main: #e8a8bd;
+  --pink-light: #f4c8d5;
+  --pink-pale: #fff3f6;
+  --pink-dark: #9a6878;
+
+  --paper: #fffdf9;
+  --paper-line: #eadfe1;
+
+  --border: #806f73;
+  --border-light: #b9a5aa;
+
+  --text: #55494d;
+  --text-light: #8c7b81;
+
+  min-height: 100vh;
+
+  box-sizing: border-box;
+
+  padding: 10px;
+
+  color: var(--text);
+
+  background-color: #fffafa;
+
+  background-image: radial-gradient(
+    rgba(120, 100, 108, 0.14) 0.55px,
+    transparent 0.55px
+  );
+
+  background-size: 4px 4px;
+
+  font-family: "Pretendard", "Malgun Gothic", Arial, sans-serif;
+
+  image-rendering: pixelated;
+}
+
+/* =========================================================
+   전체 프로그램 창
+   ========================================================= */
+
+.canvas-shell {
+  width: min(1500px, 100%);
+
+  height: calc(100vh - 20px);
+
+  min-height: 700px;
+
+  margin: 0 auto;
+
+  display: flex;
+  flex-direction: column;
+
+  overflow: hidden;
+
+  box-sizing: border-box;
+
+  border: 1px solid var(--border);
+
+  background: #ffffff;
+
+  box-shadow: 2px 2px 0 rgba(128, 111, 115, 0.25);
+}
+
+/* =========================================================
+   상단 헤더
+   ========================================================= */
+
+.canvas-header {
+  position: relative;
+
+  height: 32px;
+
+  flex-shrink: 0;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  box-sizing: border-box;
+
+  padding: 0 9px;
+
+  border-bottom: 1px solid var(--border);
+
+  background: repeating-linear-gradient(
+    to bottom,
+    #f4c8d5 0px,
+    #f4c8d5 2px,
+    #e8a8bd 2px,
+    #e8a8bd 3px
+  );
+
+  user-select: none;
+}
+
+/* =========================================================
+   제목
+   ========================================================= */
+
+.canvas-title {
+  display: flex;
+
+  align-items: center;
+
+  gap: 6px;
+
+  color: #684f57;
+
+  font-family: "Courier New", monospace;
+
+  font-size: 10px;
+
+  font-weight: bold;
+}
+
+.canvas-title-icon {
+  width: 17px;
+  height: 17px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  box-sizing: border-box;
+
+  border: 1px solid var(--border);
+
+  background: var(--pink-pale);
+
+  font-size: 10px;
+}
+
+/* =========================================================
+   저장 상태
+   ========================================================= */
+
+.canvas-header-status {
+  display: flex;
+
+  align-items: center;
+
+  gap: 5px;
+
+  color: #684f57;
+
+  font-family: "Courier New", monospace;
+
+  font-size: 7px;
+}
+
+.canvas-status-dot {
+  width: 5px;
+  height: 5px;
+
+  border-radius: 50%;
+
+  background: var(--pink-dark);
+
+  box-shadow: 0 0 0 1px rgba(128, 111, 115, 0.3);
+}
+
+/* =========================================================
+   전체 Body
+   ========================================================= */
+
+.canvas-body {
+  flex: 1;
+
+  min-height: 0;
+
+  display: grid;
+
+  grid-template-columns:
+    230px
+    minmax(0, 1fr)
+    210px;
+
+  overflow: hidden;
+
+  background: radial-gradient(
+    rgba(120, 100, 108, 0.13) 0.55px,
+    transparent 0.55px
+  );
+
+  background-size: 4px 4px;
+}
+
+/* =========================================================
+   LEFT SIDEBAR
+   ========================================================= */
+
+.canvas-sidebar {
+  min-width: 0;
+
+  min-height: 0;
+
+  box-sizing: border-box;
+
+  overflow-y: auto;
+
+  border-right: 1px solid var(--border);
+
+  background: rgba(255, 253, 249, 0.92);
+
+  /*
+   * 기존 Sidebar가 자체적으로 width / background를
+   * 가지고 있어도 페이지 레이아웃에 맞도록 정리
+   */
+  padding: 10px;
+}
+
+/* 기존 Sidebar의 바깥 스타일 */
+
+.canvas-sidebar > * {
+  width: 100%;
+
+  box-sizing: border-box;
+}
+
+/* =========================================================
+   SIDEBAR 공통 패널
+   ========================================================= */
+
+.canvas-sidebar section,
+.canvas-sidebar .panel,
+.canvas-sidebar .sidebar-section,
+.canvas-sidebar > div {
+  box-sizing: border-box;
+}
+
+/* =========================================================
+   색상 선택 영역
+   ========================================================= */
+
+.canvas-sidebar input[type="color"] {
+  width: 100%;
+
+  height: 38px;
+
+  padding: 2px;
+
+  box-sizing: border-box;
+
+  border: 1px solid var(--border);
+
+  border-radius: 0;
+
+  background: var(--paper);
+
+  cursor: pointer;
+}
+
+/* =========================================================
+   공통 버튼
+   ========================================================= */
+
+.canvas-sidebar button,
+.canvas-toolbar button {
+  border-radius: 0 !important;
+
+  font-family: "Courier New", monospace;
+
+  cursor: pointer;
+}
+
+.canvas-sidebar button:hover,
+.canvas-toolbar button:hover {
+  filter: none;
+}
+
+/* =========================================================
+   Color Palette
+   ========================================================= */
+
+.canvas-sidebar [class*="palette"] {
+  box-sizing: border-box;
+}
+
+/* =========================================================
+   색상 원형 버튼
+   ========================================================= */
+
+.canvas-sidebar button[style*="background"] {
+  border-radius: 0 !important;
+}
+
+/* =========================================================
+   LAYER PANEL
+   ========================================================= */
+
+.canvas-sidebar input[type="range"] {
+  accent-color: var(--pink-main);
+}
+
+/* =========================================================
+   RIGHT TOOLBAR
+   ========================================================= */
+
+.canvas-toolbar {
+  width: 210px;
+  min-width: 210px;
+
+  height: 100%;
+
+  box-sizing: border-box;
+
+  padding: 10px;
+
+  overflow-y: auto;
+
+  /* ⭐ 바깥 회색 박스 제거 */
+  border: none;
+  background: transparent;
+  box-shadow: none;
+}
+
+/* =========================================================
+   TOOLBAR INNER
+   ========================================================= */
+
+.canvas-toolbar-inner {
+  width: 100%;
+
+  display: flex;
+  flex-direction: column;
+
+  gap: 10px;
+
+  box-sizing: border-box;
+}
+
+/* =========================================================
+   각각의 윈도우
+   ========================================================= */
+
+.canvas-toolbar-inner .canvas-tool-panel {
+  width: 100%;
+
+  margin: 0;
+  padding: 0;
+
+  box-sizing: border-box;
+
+  border: 1px solid var(--border);
+
+  border-radius: 0;
+
+  background: var(--paper);
+
+  box-shadow: 1px 1px 0 rgba(128, 111, 115, 0.15);
+
+  overflow: hidden;
+}
+
+/* =========================================================
+   윈도우 타이틀바
+   ========================================================= */
+
+.canvas-toolbar-inner .canvas-panel-titlebar {
+  width: 100%;
+  height: 22px;
+
+  box-sizing: border-box;
+
+  padding: 0 6px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  border: none;
+  border-bottom: 1px solid var(--border);
+
+  background: repeating-linear-gradient(
+    to bottom,
+    #f4c8d5 0px,
+    #f4c8d5 2px,
+    #e8a8bd 2px,
+    #e8a8bd 3px
+  );
+
+  color: #684f57;
+
+  font-family: "Courier New", monospace;
+
+  font-size: 8px;
+
+  font-weight: bold;
+}
+
+/* 오른쪽 위 버튼 */
+
+.canvas-toolbar-inner .canvas-panel-buttons {
+  display: flex;
+
+  align-items: center;
+
+  gap: 2px;
+}
+
+.canvas-toolbar-inner .canvas-panel-buttons span {
+  display: block;
+
+  width: 7px;
+  height: 7px;
+
+  box-sizing: border-box;
+
+  border: 1px solid var(--border);
+
+  background: var(--pink-pale);
+}
+
+/* =========================================================
+   PANEL CONTENT
+   ========================================================= */
+
+.canvas-toolbar-inner .canvas-tool-panel-content {
+  width: 100%;
+
+  padding: 9px;
+
+  box-sizing: border-box;
+
+  background: var(--paper);
+}
+
+/* =========================================================
+   HISTORY
+   ========================================================= */
+
+.canvas-toolbar .history-buttons {
+  width: 100%;
+
+  display: grid;
+
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+
+  gap: 5px;
+}
+
+/* =========================================================
+   TOOLS
+   ========================================================= */
+
+.canvas-toolbar .drawing-tools {
+  width: 100%;
+
+  display: grid;
+
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+
+  gap: 5px;
+}
+
+/* =========================================================
+   TOOL BUTTON
+   ========================================================= */
+
+.canvas-toolbar .canvas-tool-button {
+  width: 100%;
+  min-width: 0;
+  min-height: 32px;
+
+  margin: 0;
+  padding: 5px;
+
+  box-sizing: border-box;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 5px;
+
+  border: 1px solid var(--border);
+
+  border-radius: 0;
+
+  background: #fffdf9;
+
+  color: var(--text);
+
+  font-family: "Courier New", monospace;
+
+  font-size: 7px;
+
+  line-height: 1;
+
+  box-shadow: none;
+
+  cursor: pointer;
+}
+
+.canvas-toolbar .canvas-tool-button:hover:not(:disabled) {
+  background: var(--pink-pale);
+
+  color: var(--pink-dark);
+}
+
+.canvas-toolbar .canvas-tool-button.active {
+  background: var(--pink-light);
+
+  border-color: var(--pink-dark);
+
+  color: #684f57;
+
+  box-shadow: 1px 1px 0 var(--border);
+}
+
+.canvas-toolbar .canvas-tool-button:active:not(:disabled) {
+  transform: translate(1px, 1px);
+
+  box-shadow: none;
+}
+
+.canvas-toolbar .canvas-tool-button:disabled {
+  opacity: 0.35;
+
+  cursor: default;
+}
+
+/* =========================================================
+   BRUSH
+   ========================================================= */
+
+.canvas-toolbar .brush-settings {
+  width: 100%;
+
+  display: flex;
+  flex-direction: column;
+
+  gap: 17px;
+}
+
+.canvas-toolbar .brush-slider {
+  width: 100%;
+
+  display: flex;
+  flex-direction: column;
+
+  gap: 6px;
+
+  box-sizing: border-box;
+}
+
+.canvas-toolbar .brush-slider-header {
+  width: 100%;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  color: var(--text);
+
+  font-family: "Courier New", monospace;
+
+  font-size: 8px;
+}
+
+.canvas-toolbar .brush-slider-value {
+  color: var(--pink-dark);
+
+  font-weight: bold;
+}
+
+.canvas-toolbar .brush-slider input[type="range"] {
+  width: 100%;
+
+  height: 14px;
+
+  margin: 0;
+  padding: 0;
+
+  accent-color: var(--pink-main);
+
+  cursor: pointer;
+}
+
+/* =========================================================
+   가운데 작업 영역
+   ========================================================= */
+
+.canvas-workspace {
+  min-width: 0;
+
+  min-height: 0;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  box-sizing: border-box;
+
+  padding: 24px;
+
+  overflow: auto;
+}
+
+/* =========================================================
+   펼친 일기장
+   ========================================================= */
+
+.canvas-diary-book {
+  position: relative;
+
+  width: min(1000px, 100%);
+
+  min-height: 590px;
+
+  aspect-ratio: 1.65 / 1;
+
+  display: grid;
+
+  grid-template-columns: 1fr 1fr;
+
+  box-sizing: border-box;
+
+  border: 1px solid var(--border);
+
+  background: var(--paper);
+
+  box-shadow: 4px 4px 0 rgba(128, 111, 115, 0.22);
+
+  transform: rotate(-0.15deg);
+}
+
+/* =========================================================
+   일기장 페이지
+   ========================================================= */
+
+.canvas-diary-page {
+  position: relative;
+
+  min-width: 0;
+
+  min-height: 0;
+
+  box-sizing: border-box;
+
+  padding: 32px 36px;
+
+  overflow: hidden;
+
+  background-color: var(--paper);
+
+  background-image: repeating-linear-gradient(
+    to bottom,
+    transparent 0,
+    transparent 28px,
+    var(--paper-line) 29px,
+    transparent 30px
+  );
+}
+
+/* 왼쪽 */
+
+.canvas-diary-page-left {
+  border-right: 1px solid #c8b8bc;
+}
+
+/* 오른쪽 */
+
+.canvas-diary-page-right {
+  border-left: 1px solid rgba(128, 111, 115, 0.08);
+}
+
+/* =========================================================
+   책 가운데 접힌 부분
+   ========================================================= */
+
+.canvas-diary-book::before {
+  content: "";
+
+  position: absolute;
+
+  top: 0;
+  bottom: 0;
+
+  left: 50%;
+
+  width: 4px;
+
+  transform: translateX(-50%);
+
+  z-index: 10;
+
+  pointer-events: none;
+
+  background: linear-gradient(
+    to right,
+    rgba(120, 100, 108, 0.03),
+    rgba(120, 100, 108, 0.16),
+    rgba(255, 255, 255, 0.7)
+  );
+}
+
+/* =========================================================
+   페이지 접힌 모서리
+   ========================================================= */
+
+.canvas-diary-page::after {
+  content: "";
+
+  position: absolute;
+
+  top: 0;
+  right: 0;
+
+  width: 27px;
+  height: 27px;
+
+  background: #ffffff;
+
+  border-left: 1px solid var(--border-light);
+
+  border-bottom: 1px solid var(--border-light);
+
+  clip-path: polygon(0 0, 100% 100%, 0 100%);
+
+  pointer-events: none;
+}
+
+/* =========================================================
+   페이지 제목
+   ========================================================= */
+
+.canvas-page-heading {
+  position: relative;
+
+  z-index: 2;
+
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 3px;
+
+  margin-bottom: 17px;
+}
+
+.canvas-page-label {
+  color: var(--text);
+
+  font-family: "Courier New", monospace;
+
+  font-size: 11px;
+
+  font-weight: bold;
+
+  letter-spacing: 0.05em;
+}
+
+.canvas-page-hint {
+  color: var(--text-light);
+
+  font-family: "Courier New", monospace;
+
+  font-size: 7px;
+
+  text-transform: uppercase;
+}
+
+/* =========================================================
+   그림 영역
+   ========================================================= */
+
+.canvas-drawing-area {
+  position: relative;
+
+  width: 100%;
+
+  height: calc(100% - 65px);
+
+  min-height: 400px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  box-sizing: border-box;
+
+  padding: 8px;
+
+  overflow: hidden;
+
+  border: 1px dashed var(--border-light);
+
+  background: rgba(255, 255, 255, 0.5);
+}
+
+/* =========================================================
+   CanvasStage wrapper
+   ========================================================= */
+
+.canvas-drawing-area > div {
+  width: 100%;
+
+  height: 100%;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  margin-top: 0 !important;
+
+  touch-action: none;
+
+  user-select: none;
+
+  overflow: hidden;
+}
+
+/* 실제 Canvas */
+
+.canvas-drawing-area canvas {
+  display: block;
+
+  max-width: 100%;
+
+  max-height: 100%;
+
+  object-fit: contain;
+}
+
+/* =========================================================
+   DIARY EDITOR
+   ========================================================= */
+
+.canvas-diary-editor {
+  width: 100%;
+
+  height: calc(100% - 65px);
+
+  min-height: 400px;
+
+  display: flex;
+
+  flex-direction: column;
+
+  box-sizing: border-box;
+}
+
+/* 날짜 */
+
+.canvas-diary-date {
+  margin-bottom: 9px;
+
+  color: var(--text-light);
+
+  font-family: "Courier New", monospace;
+
+  font-size: 7px;
+}
+
+/* =========================================================
+   제목
+   ========================================================= */
+
+.canvas-diary-title-input {
+  width: 100%;
+
+  margin-bottom: 14px;
+
+  padding: 4px 0 7px;
+
+  box-sizing: border-box;
+
+  border: none;
+
+  border-bottom: 1px solid var(--border-light);
+
+  outline: none;
+
+  background: transparent;
+
+  color: var(--text);
+
+  font-family: "Courier New", monospace;
+
+  font-size: 15px;
+
+  font-weight: bold;
+}
+
+.canvas-diary-title-input::placeholder {
+  color: #b9aaae;
+}
+
+.canvas-diary-title-input:focus {
+  border-bottom-color: var(--pink-main);
+}
+
+/* =========================================================
+   본문
+   ========================================================= */
+
+.canvas-diary-textarea {
+  flex: 1;
+
+  width: 100%;
+
+  min-height: 0;
+
+  padding: 0;
+
+  resize: none;
+
+  box-sizing: border-box;
+
+  border: none;
+
+  outline: none;
+
+  background-color: transparent;
+
+  background-image: repeating-linear-gradient(
+    to bottom,
+    transparent 0,
+    transparent 27px,
+    var(--paper-line) 28px,
+    transparent 29px
+  );
+
+  color: var(--text);
+
+  font-family: "Pretendard", "Malgun Gothic", sans-serif;
+
+  font-size: 11px;
+
+  line-height: 28px;
+}
+
+.canvas-diary-textarea::placeholder {
+  color: #b9aaae;
+}
+
+/* =========================================================
+   페이지 하단
+   ========================================================= */
+
+.canvas-page-footer {
+  position: absolute;
+
+  left: 36px;
+  right: 36px;
+  bottom: 15px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  color: var(--text-light);
+
+  font-family: "Courier New", monospace;
+
+  font-size: 6px;
+}
+
+/* 저장 상태 */
+
+.canvas-save-status {
+  color: var(--pink-dark);
+}
+
+/* =========================================================
+   기존 Sidebar / Toolbar 내부 제목 통일
+   ========================================================= */
+
+.canvas-sidebar h1,
+.canvas-sidebar h2,
+.canvas-sidebar h3,
+.canvas-sidebar h4,
+.canvas-toolbar h1,
+.canvas-toolbar h2,
+.canvas-toolbar h3,
+.canvas-toolbar h4 {
+  color: var(--text);
+
+  font-family: "Courier New", monospace;
+}
+
+/* =========================================================
+   Sidebar 텍스트
+   ========================================================= */
+
+.canvas-sidebar label,
+.canvas-sidebar span,
+.canvas-sidebar p,
+.canvas-toolbar label,
+.canvas-toolbar span,
+.canvas-toolbar p {
+  color: var(--text);
+}
+
+/* =========================================================
+   range slider
+   ========================================================= */
+
+.canvas-sidebar input[type="range"],
+.canvas-toolbar input[type="range"] {
+  width: 100%;
+
+  accent-color: var(--pink-main);
+
+  cursor: pointer;
+}
+
+/* =========================================================
+   Toolbar 아이콘 버튼
+   ========================================================= */
+
+.canvas-toolbar button svg,
+.canvas-sidebar button svg {
+  width: 14px;
+  height: 14px;
+}
+
+/* =========================================================
+   공통 스크롤바
+   ========================================================= */
+
+.canvas-page ::-webkit-scrollbar {
+  width: 7px;
+
+  height: 7px;
+}
+
+.canvas-page ::-webkit-scrollbar-track {
+  background: var(--pink-pale);
+}
+
+.canvas-page ::-webkit-scrollbar-thumb {
+  border: 1px solid var(--border);
+
+  background: var(--pink-light);
+}
+
+.canvas-page ::-webkit-scrollbar-thumb:hover {
+  background: var(--pink-main);
+}
+
+/* =========================================================
+   하단 상태 영역
+   ========================================================= */
+
+.canvas-shell::after {
+  content: "♡ drawing diary";
+
+  height: 20px;
+
+  flex-shrink: 0;
+
+  display: flex;
+
+  align-items: center;
+
+  box-sizing: border-box;
+
+  padding: 0 8px;
+
+  border-top: 1px solid var(--border);
+
+  background: repeating-linear-gradient(
+    to bottom,
+    #f4c8d5 0px,
+    #f4c8d5 2px,
+    #e8a8bd 2px,
+    #e8a8bd 3px
+  );
+
+  color: #684f57;
+
+  font-family: "Courier New", monospace;
+
+  font-size: 7px;
+}
+
+/* =========================================================
+   Tablet
+   ========================================================= */
+
+@media (max-width: 1150px) {
+  .canvas-body {
+    grid-template-columns:
+      200px
+      minmax(0, 1fr)
+      185px;
+  }
+
+  .canvas-workspace {
+    padding: 18px;
+  }
+
+  .canvas-diary-book {
+    min-height: 540px;
+  }
+
+  .canvas-diary-page {
+    padding: 28px;
+  }
+
+  .canvas-page-footer {
+    left: 28px;
+    right: 28px;
+  }
+}
+
+/* =========================================================
+   작은 화면
+   ========================================================= */
+
+@media (max-width: 900px) {
+  .canvas-body {
+    grid-template-columns:
+      180px
+      minmax(0, 1fr);
+  }
+
+  .canvas-toolbar {
+    display: none;
+  }
+
+  .canvas-diary-book {
+    min-height: 500px;
+  }
+
+  .canvas-diary-page {
+    padding: 25px;
+  }
+
+  .canvas-page-footer {
+    left: 25px;
+    right: 25px;
+  }
+}
+
+/* =========================================================
+   모바일
+   ========================================================= */
+
+@media (max-width: 650px) {
+  .canvas-shell {
+    height: auto;
+
+    min-height: calc(100vh - 20px);
+  }
+
+  .canvas-body {
+    display: flex;
+
+    flex-direction: column;
+
+    overflow: visible;
+  }
+
+  .canvas-sidebar {
+    min-height: auto;
+
+    border-right: none;
+
+    border-bottom: 1px solid var(--border);
+  }
+
+  .canvas-toolbar {
+    display: none;
+  }
+
+  .canvas-workspace {
+    min-height: 650px;
+
+    padding: 12px;
+  }
+
+  /*
+   * 모바일에서는 책을 위/아래로
+   * 접어서 보여줌
+   */
+
+  .canvas-diary-book {
+    aspect-ratio: auto;
+
+    min-height: 900px;
+
+    grid-template-columns: 1fr;
+
+    grid-template-rows: 1fr 1fr;
+  }
+
+  .canvas-diary-page-left {
+    border-right: none;
+
+    border-bottom: 1px solid #c8b8bc;
+  }
+
+  .canvas-diary-book::before {
+    top: 50%;
+    bottom: auto;
+
+    left: 0;
+    right: 0;
+
+    width: auto;
+    height: 4px;
+
+    transform: translateY(-50%);
+  }
+}
+
+/* =========================================================
+   Sidebar Inner
+   ========================================================= */
+
+.canvas-sidebar-inner {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 10px;
+
+  width: 100%;
+}
+
+/* =========================================================
+   공통 Panel
+   ========================================================= */
+
+.canvas-panel,
+.canvas-tool-panel {
+  width: 100%;
+
+  box-sizing: border-box;
+
+  border: 1px solid var(--border);
+
+  background: var(--paper);
+
+  box-shadow: 1px 1px 0 rgba(128, 111, 115, 0.12);
+}
+
+/* =========================================================
+   Panel Titlebar
+   ========================================================= */
+
+.canvas-panel-titlebar {
+  height: 21px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  box-sizing: border-box;
+
+  padding: 0 5px;
+
+  border-bottom: 1px solid var(--border);
+
+  background: repeating-linear-gradient(
+    to bottom,
+    #f4c8d5 0px,
+    #f4c8d5 2px,
+    #e8a8bd 2px,
+    #e8a8bd 3px
+  );
+
+  color: #684f57;
+
+  font-family: "Courier New", monospace;
+
+  font-size: 8px;
+
+  font-weight: bold;
+}
+
+.canvas-panel-buttons {
+  display: flex;
+
+  gap: 2px;
+}
+
+.canvas-panel-buttons span {
+  width: 7px;
+  height: 6px;
+
+  box-sizing: border-box;
+
+  border: 1px solid var(--border);
+
+  background: var(--pink-pale);
+}
+
+/* =========================================================
+   Panel Content
+   ========================================================= */
+
+.canvas-panel-content,
+.canvas-tool-panel-content {
+  padding: 9px;
+}
+
+/* =========================================================
+   Color Picker
+   ========================================================= */
+
+.color-picker {
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+
+  gap: 7px;
+}
+
+.color-picker-preview {
+  position: relative;
+
+  width: 100%;
+
+  height: 55px;
+
+  box-sizing: border-box;
+
+  border: 1px solid var(--border);
+
+  background: repeating-conic-gradient(#eeeeee 0% 25%, #ffffff 0% 50%) 50% / 8px
+    8px;
+}
+
+.color-picker-preview input[type="color"] {
+  position: absolute;
+
+  inset: 0;
+
+  width: 100%;
+  height: 100%;
+
+  padding: 0;
+
+  opacity: 0;
+
+  cursor: pointer;
+}
+
+.color-picker-current {
+  position: absolute;
+
+  inset: 4px;
+
+  pointer-events: none;
+
+  border: 1px solid var(--border);
+}
+
+.color-picker-value {
+  color: var(--text-light);
+
+  font-family: "Courier New", monospace;
+
+  font-size: 7px;
+
+  letter-spacing: 0.04em;
+}
+
+/* =========================================================
+   Color Palette
+   ========================================================= */
+
+.color-palette {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 7px;
+}
+
+.color-palette-label {
+  color: var(--text-light);
+
+  font-family: "Courier New", monospace;
+
+  font-size: 7px;
+}
+
+.color-palette-grid {
+  display: grid;
+
+  grid-template-columns: repeat(8, 1fr);
+
+  gap: 4px;
+}
+
+.color-swatch {
+  width: 100%;
+
+  aspect-ratio: 1;
+
+  padding: 0;
+
+  box-sizing: border-box;
+
+  border: 1px solid var(--border-light);
+
+  border-radius: 0;
+
+  background: #eeeeee;
+
+  cursor: pointer;
+}
+
+.color-swatch.empty {
+  background: repeating-linear-gradient(
+    45deg,
+    #eeeeee,
+    #eeeeee 2px,
+    #ffffff 2px,
+    #ffffff 4px
+  );
+
+  cursor: default;
+
+  opacity: 0.7;
+}
+
+.color-swatch.has-color:hover {
+  border-color: var(--border);
+
+  transform: translate(-1px, -1px);
+
+  box-shadow: 1px 1px 0 var(--border-light);
+}
+
+/* =========================================================
+   Layer Panel
+   ========================================================= */
+
+.layer-panel {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 7px;
+}
+
+.layer-list {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 4px;
+
+  max-height: 250px;
+
+  overflow-y: auto;
+}
+
+/* =========================================================
+   Layer Item
+   ========================================================= */
+
+.layer-item {
+  min-height: 32px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  gap: 5px;
+
+  box-sizing: border-box;
+
+  padding: 4px 5px;
+
+  border: 1px solid var(--border-light);
+
+  background: #ffffff;
+
+  cursor: pointer;
+}
+
+.layer-item:hover {
+  background: var(--pink-pale);
+}
+
+.layer-item.selected {
+  border-color: var(--border);
+
+  background: var(--pink-light);
+
+  box-shadow: 1px 1px 0 var(--border);
+}
+
+.layer-item-main {
+  min-width: 0;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 5px;
+}
+
+.layer-item-actions {
+  display: flex;
+
+  align-items: center;
+
+  gap: 1px;
+
+  flex-shrink: 0;
+}
+
+/* Thumbnail */
+
+.layer-thumbnail {
+  width: 20px;
+  height: 20px;
+
+  flex-shrink: 0;
+
+  box-sizing: border-box;
+
+  border: 1px solid var(--border-light);
+
+  background: repeating-conic-gradient(#eeeeee 0% 25%, #ffffff 0% 50%) 50% / 6px
+    6px;
+}
+
+/* 이름 */
+
+.layer-name {
+  min-width: 0;
+
+  overflow: hidden;
+
+  text-overflow: ellipsis;
+
+  white-space: nowrap;
+
+  color: var(--text);
+
+  font-family: "Courier New", monospace;
+
+  font-size: 7px;
+}
+
+/* 아이콘 버튼 */
+
+.layer-icon-button {
+  width: 18px;
+  height: 18px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  padding: 0;
+
+  border: none;
+
+  background: transparent;
+
+  color: var(--text-light);
+
+  cursor: pointer;
+}
+
+.layer-icon-button:hover:not(:disabled) {
+  color: var(--pink-dark);
+
+  background: var(--pink-pale);
+}
+
+.layer-icon-button:disabled {
+  opacity: 0.25;
+
+  cursor: default;
+}
+
+.layer-delete-button:hover:not(:disabled) {
+  color: #a56f7d;
+}
+
+/* =========================================================
+   Layer Opacity
+   ========================================================= */
+
+.layer-opacity {
+  padding-top: 7px;
+
+  border-top: 1px dashed var(--border-light);
+}
+
+.layer-opacity-header {
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  margin-bottom: 5px;
+
+  color: var(--text-light);
+
+  font-family: "Courier New", monospace;
+
+  font-size: 7px;
+}
+
+.layer-opacity input[type="range"] {
+  width: 100%;
+
+  accent-color: var(--pink-main);
+}
+
+/* =========================================================
+   Action Button
+   ========================================================= */
+
+.canvas-action-button {
+  width: 100%;
+
+  min-height: 26px;
+
+  box-sizing: border-box;
+
+  border: 1px solid var(--border);
+
+  background: var(--paper);
+
+  color: var(--text);
+
+  font-family: "Courier New", monospace;
+
+  font-size: 7px;
+
+  cursor: pointer;
+}
+
+.canvas-action-button:hover {
+  background: var(--pink-pale);
+}
+
+.canvas-action-button:active {
+  transform: translate(1px, 1px);
+}
+
+.canvas-ai-button {
+  border-color: var(--pink-main);
+
+  color: var(--pink-dark);
+
+  background: var(--pink-pale);
+}
+
+/* =========================================================
+   Toolbar Inner
+   ========================================================= */
+
+.canvas-toolbar-inner {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 10px;
+
+  width: 100%;
+}
+
+/* =========================================================
+   History
+   ========================================================= */
+
+.history-buttons {
+  display: grid;
+
+  grid-template-columns: 1fr 1fr;
+
+  gap: 5px;
+}
+
+/* =========================================================
+   Drawing Tools
+   ========================================================= */
+
+.drawing-tools {
+  display: grid;
+
+  grid-template-columns: repeat(2, 1fr);
+
+  gap: 5px;
+}
+
+/* =========================================================
+   Brush Settings
+   ========================================================= */
+
+.brush-settings {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 14px;
+}
+
+/* =========================================================
+   Brush Slider
+   ========================================================= */
+
+.brush-slider {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 6px;
+}
+
+.brush-slider-header {
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  color: var(--text);
+
+  font-family: "Courier New", monospace;
+
+  font-size: 7px;
+}
+
+.brush-slider-value {
+  color: var(--pink-dark);
+}
+
+.brush-slider input[type="range"] {
+  width: 100%;
+
+  margin: 0;
+
+  accent-color: var(--pink-main);
+
+  cursor: pointer;
+}

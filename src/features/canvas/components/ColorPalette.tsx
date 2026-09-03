@@ -6,44 +6,27 @@ export default function ColorPalette() {
   const setColor = useCanvasStore((state) => state.setColor);
 
   return (
-    <div
-      style={{
-        border: "1px solid #ccc",
-        padding: 10,
-      }}
-    >
-      <p style={{ marginBottom: 10 }}>최근 색상</p>
+    <div className="color-palette">
+      <div className="color-palette-label">최근 사용한 색</div>
 
-      <div
-        style={{
-          display: "grid",
-          gridTemplateColumns: "repeat(8, 1fr)",
-          gap: 6,
-        }}
-      >
+      <div className="color-palette-grid">
         {Array.from({ length: 16 }).map((_, index) => {
           const color = recentColors[index];
 
           return (
             <button
               key={index}
-
+              className={`color-swatch ${color ? "has-color" : "empty"}`}
               onClick={() => {
                 if (color) {
                   setColor(color);
                 }
               }}
-
+              disabled={!color}
               style={{
-                width: 20,
-                height: 20,
-
-                border: "1px solid #aaa",
-
-                background: color ?? "#eee",
-
-                cursor: color ? "pointer" : "default",
+                backgroundColor: color ?? undefined,
               }}
+              aria-label={color ? `최근 색상 ${color}` : "비어 있는 색상"}
             />
           );
         })}

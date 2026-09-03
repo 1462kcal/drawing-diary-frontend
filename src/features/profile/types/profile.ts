@@ -14,11 +14,15 @@ export interface ProfileUser {
 
 export interface Diary {
   id: number;
+
   title: string;
+  content: string;
+
+  thumbnailUrl: string | null;
   imageUrl: string | null;
+
   createdAt: string;
 
-  // 현재 api 응답에는 없으므로 선택값
   categoryId?: number;
   categoryName?: string;
 

@@ -16,7 +16,7 @@ const mockFeeds: FeedItem[] = [
     profileImageUrl: null,
     title: "우뿌뿌뿌",
     content:
-      "우뿌뿌뿌뿌우뿌뿌뿌뿌우뿌뿌뿌뿌우뿌뿌뿌뿌우뿌뿌뿌뿌우뿌뿌뿌뿌우뿌뿌뿌뿌우뿌뿌뿌뿌우뿌뿌뿌뿌우뿌뿌뿌뿌우뿌뿌뿌뿌우뿌뿌뿌뿌우뿌뿌뿌뿌우뿌뿌뿌뿌",
+      "우뿌뿌뿌뿌우뿌뿌뿌뿌우뿌뿌뿌뿌우뿌뿌뿌뿌우뿌뿌뿌뿌우뿌뿌뿌뿌우뿌뿌뿌뿌우뿌뿌뿌뿌우뿌뿌뿌뿌우뿌뿌뿌뿌우뿌뿌뿌뿌우뿌뿌뿌뿌우뿌뿌뿌뿌",
     imageUrl: null,
   },
   {
@@ -31,34 +31,24 @@ const mockFeeds: FeedItem[] = [
 
 export default function Feed() {
   return (
-    <section
-      style={{
-        display: "flex",
-        flexDirection: "column",
-        gap: 20,
-      }}
-    >
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "space-between",
-          alignItems: "center",
-        }}
-      >
-        <h2
-          style={{
-            margin: 0,
-          }}
-        >
-          피드
-        </h2>
+    <section className="feed-section">
+      {/* <div className="feed-section-header">
+        <div>
+          <span className="feed-small-label">LATEST POSTS</span>
 
-        <button>전체 보기</button>
+          <h2>피드</h2>
+        </div>
+
+        <button type="button" className="text-button">
+          전체 보기 →
+        </button>
+      </div> */}
+
+      <div className="feed-list">
+        {mockFeeds.map((feed, index) => (
+          <FeedCard key={feed.id} item={feed} index={index} />
+        ))}
       </div>
-
-      {mockFeeds.map((feed) => (
-        <FeedCard key={feed.id} item={feed} />
-      ))}
     </section>
   );
 }

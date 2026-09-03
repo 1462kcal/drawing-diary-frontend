@@ -12,6 +12,8 @@ import type { HomeTab } from "../features/home/types/home";
 
 import { useAuthStore } from "../features/auth/store/authStore";
 
+import "../features/home/styles/home.css";
+
 export default function HomePage() {
   const location = useLocation();
 
@@ -63,45 +65,23 @@ export default function HomePage() {
   }, [accessToken]);
 
   return (
-    <div
-      style={{
-        minHeight: "100vh",
+    <div className="home-page">
+      <div className="home-window">
+        <Header />
 
-        backgroundColor: "#F5F2EC",
+        <div className="home-layout">
+          <Sidebar user={user} loading={loading} />
 
-        color: "#34312D",
-      }}
-    >
-      {/* Header */}
-      <Header />
+          <main className="home-main">
+            {!loading && <HomeContent user={user} activeTab={activeTab} />}
+          </main>
+        </div>
 
-      {/* Body */}
-      <div
-        style={{
-          display: "flex",
+        <footer className="home-footer">
+          <span>♡ shared diary</span>
 
-          minHeight: "calc(100vh - 64px)",
-        }}
-      >
-        {/* Sidebar */}
-        <Sidebar user={user} loading={loading} />
-
-        {/* Content */}
-        <main
-          style={{
-            flex: 1,
-
-            minWidth: 0,
-
-            maxWidth: 980,
-
-            padding: "36px 48px 64px",
-
-            boxSizing: "border-box",
-          }}
-        >
-          {!loading && <HomeContent user={user} activeTab={activeTab} />}
-        </main>
+          <span>drawing diary community</span>
+        </footer>
       </div>
     </div>
   );
