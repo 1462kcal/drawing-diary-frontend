@@ -7,9 +7,10 @@ import type {
 
 const BASE_URL = "https://drawing-diary-production.up.railway.app";
 
-/**
- * 로그인
- */
+// ========================================
+// 로그인
+// ========================================
+
 export async function login(data: LoginRequest): Promise<LoginResponse> {
   const response = await fetch(`${BASE_URL}/api/auth/login`, {
     method: "POST",
@@ -26,9 +27,10 @@ export async function login(data: LoginRequest): Promise<LoginResponse> {
   return response.json();
 }
 
-/**
- * 회원가입
- */
+// ========================================
+// 회원가입
+// ========================================
+
 export async function signup(data: SignupRequest): Promise<SignupResponse> {
   const response = await fetch(`${BASE_URL}/api/auth/signup`, {
     method: "POST",
@@ -45,9 +47,38 @@ export async function signup(data: SignupRequest): Promise<SignupResponse> {
   return response.json();
 }
 
-/**
- * 로그아웃
- */
+// ========================================
+// Access Token 갱신
+// ========================================
+
+export interface RefreshResponse {
+  accessToken: string;
+}
+
+export async function refreshAccessToken(
+  refreshToken: string,
+): Promise<RefreshResponse> {
+  const response = await fetch(`${BASE_URL}/api/auth/refresh`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      refreshToken,
+    }),
+  });
+
+  if (!response.ok) {
+    throw new Error("토큰 갱신에 실패했습니다.");
+  }
+
+  return response.json();
+}
+
+// ========================================
+// 로그아웃
+// ========================================
+
 export async function logout(refreshToken: string): Promise<void> {
   const response = await fetch(`${BASE_URL}/api/auth/logout`, {
     method: "POST",
