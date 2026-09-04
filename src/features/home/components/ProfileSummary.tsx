@@ -1,13 +1,17 @@
+import { Bell } from "lucide-react";
+
 import type { User } from "../types/user";
 
 interface ProfileSummaryProps {
   user: User | null;
   loading?: boolean;
+  onNotificationClick?: () => void;
 }
 
 export default function ProfileSummary({
   user,
   loading = false,
+  onNotificationClick,
 }: ProfileSummaryProps) {
   if (loading) {
     return (
@@ -36,8 +40,14 @@ export default function ProfileSummary({
         <span>MY SPACE</span>
 
         <div className="retro-window-buttons">
-          <span />
-          <span />
+          <button
+            type="button"
+            className="my-space-notification"
+            aria-label="알림"
+            onClick={onNotificationClick}
+          >
+            <Bell size={13} />
+          </button>
         </div>
       </div>
 

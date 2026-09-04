@@ -1,14 +1,12 @@
-import { Bell, Search, UserRound } from "lucide-react";
+import { Search } from "lucide-react";
 
-export default function Header() {
+interface HeaderProps {
+  onLogout: () => void;
+}
+
+export default function Header({ onLogout }: HeaderProps) {
   return (
     <header className="home-header">
-      <div className="home-window-controls">
-        <span />
-        <span />
-        <span />
-      </div>
-
       <div className="home-header-title">drawing diary.</div>
 
       <div className="home-header-actions">
@@ -17,17 +15,19 @@ export default function Header() {
 
           <input type="text" placeholder="일기 검색" aria-label="일기 검색" />
         </div>
+      </div>
 
-        <button type="button" className="header-icon-button" aria-label="알림">
-          <Bell size={15} />
-        </button>
+      <div className="home-window-controls">
+        <span className="window-minimize">-</span>
+        <span className="window-maximize">□</span>
 
         <button
           type="button"
-          className="header-profile-button"
-          aria-label="프로필"
+          className="window-close"
+          aria-label="로그아웃"
+          onClick={onLogout}
         >
-          <UserRound size={15} />
+          ×
         </button>
       </div>
     </header>

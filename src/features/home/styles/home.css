@@ -117,10 +117,85 @@
 .home-window-controls {
   display: flex;
 
-  gap: 4px;
+  align-items: center;
+
+  gap: 0;
+
+  flex-shrink: 0;
+
+  /* 검색창과 윈도우 버튼 사이 여백 */
+  margin-left: 12px;
+
+  /* 구분선 */
+  padding-left: 12px;
+
+  border-left: 1px solid var(--line-light);
 }
 
 .home-window-controls span,
+.home-window-controls button {
+  width: 19px;
+  height: 17px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  box-sizing: border-box;
+
+  padding: 0;
+
+  border: 1px solid var(--line);
+
+  background: #fff5f7;
+
+  color: var(--text);
+
+  font-family: Arial, sans-serif;
+
+  font-size: 10px;
+
+  line-height: 1;
+}
+
+.home-window-controls .window-minimize {
+  padding-bottom: 3px;
+
+  font-size: 11px;
+}
+
+.home-window-controls .window-maximize {
+  font-size: 9px;
+}
+
+.home-window-controls .window-close {
+  font-size: 13px;
+
+  cursor: pointer;
+}
+
+.home-window-controls .window-close:hover {
+  background: var(--pink-light);
+}
+
+.home-window-controls .window-close:active {
+  background: var(--pink);
+}
+
+/* =========================================================
+   MY SPACE WINDOW BUTTONS
+   ========================================================= */
+
+.retro-window-buttons {
+  display: flex;
+
+  align-items: center;
+
+  gap: 3px;
+}
+
+/* 기존 작은 윈도우 버튼 */
 .retro-window-buttons span {
   width: 10px;
   height: 9px;
@@ -134,10 +209,35 @@
   background: #fff5f7;
 }
 
-.retro-window-buttons {
+/* MY SPACE 알림 버튼 */
+.my-space-notification {
+  width: 19px;
+  height: 17px;
+
   display: flex;
 
-  gap: 3px;
+  align-items: center;
+  justify-content: center;
+
+  padding: 0;
+
+  box-sizing: border-box;
+
+  border: 1px solid var(--line);
+
+  background: #fff5f7;
+
+  color: var(--text);
+
+  cursor: pointer;
+}
+
+.my-space-notification:hover {
+  background: var(--pink-light);
+}
+
+.my-space-notification:active {
+  background: var(--pink);
 }
 
 /* =========================================================
