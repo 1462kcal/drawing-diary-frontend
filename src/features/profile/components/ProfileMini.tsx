@@ -11,9 +11,9 @@ export default function ProfileMini({ user }: ProfileMiniProps) {
         <span>PROFILE</span>
 
         <div className="retro-buttons">
+          {/* <span />
           <span />
-          <span />
-          <span />
+          <span /> */}
         </div>
       </div>
 
@@ -34,14 +34,15 @@ export default function ProfileMini({ user }: ProfileMiniProps) {
 
         <div className="profile-mini-meta">
           <div>
-            <span>DIARY</span>
-            <strong>♡</strong>
+            <span>following</span>
+            <strong>0</strong>
           </div>
 
           <div>
-            <span>STATUS</span>
-            <strong>online</strong>
+            <span>followers</span>
+            <strong>0</strong>
           </div>
+          <div>팔로우/언팔로우 버튼 혹은 일기쓰기 버튼 넣을 것</div>
         </div>
       </div>
     </section>

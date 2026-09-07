@@ -16,11 +16,7 @@ export default function CategoryPanel({
       <div className="retro-titlebar">
         <span>CATEGORY</span>
 
-        <div className="retro-buttons">
-          <span />
-          <span />
-          <span />
-        </div>
+        <div className="retro-buttons"></div>
       </div>
 
       <div className="category-content">

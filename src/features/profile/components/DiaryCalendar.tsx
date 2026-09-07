@@ -116,11 +116,7 @@ export default function DiaryCalendar({
       <div className="retro-titlebar">
         <span>CALENDAR</span>
 
-        <div className="retro-buttons">
-          <span />
-          <span />
-          <span />
-        </div>
+        <div className="retro-buttons"></div>
       </div>
 
       <div className="calendar-content">
