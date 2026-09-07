@@ -3,10 +3,15 @@ import type { ChangeEvent } from "react";
 interface DiaryEditorProps {
   title: string;
   content: string;
+
   onTitleChange: (title: string) => void;
   onContentChange: (content: string) => void;
+
   onSave: () => void;
+  onSubmit: () => void;
+
   isSaving: boolean;
+  isSubmitting: boolean;
 }
 
 export default function DiaryEditor({
@@ -15,7 +20,9 @@ export default function DiaryEditor({
   onTitleChange,
   onContentChange,
   onSave,
+  onSubmit,
   isSaving,
+  isSubmitting,
 }: DiaryEditorProps) {
   const handleTitleChange = (e: ChangeEvent<HTMLInputElement>) => {
     onTitleChange(e.target.value);
@@ -25,9 +32,11 @@ export default function DiaryEditor({
     onContentChange(e.target.value);
   };
 
+  const isDisabled = isSaving || isSubmitting;
+
   return (
     <div className="canvas-diary-editor">
-      <div className="canvas-diary-date">2026. 09. 04</div>
+      <div className="canvas-diary-date">2026. 09. 07</div>
 
       <input
         type="text"
@@ -35,7 +44,7 @@ export default function DiaryEditor({
         placeholder="오늘의 제목..."
         value={title}
         onChange={handleTitleChange}
-        disabled={isSaving}
+        disabled={isDisabled}
       />
 
       <textarea
@@ -43,17 +52,28 @@ export default function DiaryEditor({
         placeholder="오늘 있었던 일을 적어보세요..."
         value={content}
         onChange={handleContentChange}
-        disabled={isSaving}
+        disabled={isDisabled}
       />
 
-      <button
-        type="button"
-        className="canvas-diary-save-button"
-        onClick={onSave}
-        disabled={isSaving || !title.trim() || !content.trim()}
-      >
-        {isSaving ? "저장 중..." : "저장"}
-      </button>
+      <div className="canvas-diary-actions">
+        <button
+          type="button"
+          className="canvas-diary-save-button"
+          onClick={onSave}
+          disabled={isDisabled || !title.trim() || !content.trim()}
+        >
+          {isSaving ? "저장 중..." : "임시 저장"}
+        </button>
+
+        <button
+          type="button"
+          className="canvas-diary-submit-button"
+          onClick={onSubmit}
+          disabled={isDisabled || !title.trim() || !content.trim()}
+        >
+          {isSubmitting ? "발행 중..." : "일기 발행"}
+        </button>
+      </div>
     </div>
   );
 }

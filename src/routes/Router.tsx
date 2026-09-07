@@ -24,7 +24,7 @@ export default function Router() {
           <Route path="/" element={<HomePage />} />
           <Route path="/popular" element={<HomePage />} />
           <Route path="/ranking" element={<HomePage />} />
-          <Route path="/canvas" element={<CanvasPage />} />
+          <Route path="/canvas/:roomId" element={<CanvasPage />} />
           <Route path="/profile" element={<ProfilePage />} />
         </Route>
       </Routes>
