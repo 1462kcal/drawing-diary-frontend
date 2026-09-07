@@ -1,16 +1,19 @@
 // TODO: 레이어 전체를 하나의 결과물로 합성한 뒤 opacity를 적용하도록 개선 필요.
 // 현재는 Stroke 단위 합성으로 인해 겹친 부분의 농도가 달라짐
 
-import { Stage, Layer, Line, Group } from "react-konva";
+import { forwardRef } from "react";
+import Konva from "konva";
+import { Stage, Layer, Line } from "react-konva";
 
 import useCanvas from "../hooks/useCanvas";
 
-export default function CanvasStage() {
+const CanvasStage = forwardRef<Konva.Stage, {}>((_, ref) => {
   const { layers, startDrawing, draw, endDrawing } = useCanvas();
 
   return (
     <div className="canvas-stage-wrapper">
       <Stage
+        ref={ref}
         width={1000}
         height={700}
         onPointerDown={(e) => {
@@ -64,4 +67,8 @@ export default function CanvasStage() {
       </Stage>
     </div>
   );
-}
+});
+
+CanvasStage.displayName = "CanvasStage";
+
+export default CanvasStage;

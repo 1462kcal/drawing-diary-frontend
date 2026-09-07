@@ -23,14 +23,21 @@ export async function getMyDiaries(): Promise<Diary[]> {
     (diary: {
       id: number;
       title: string;
+      content: string;
       createdAt: string;
       thumbnailUrl: string | null;
+      categoryId: number | null;
+      categoryName: string | null;
       visibility: "PUBLIC" | "PRIVATE" | "FOLLOWERS_ONLY";
     }) => ({
       id: diary.id,
       title: diary.title,
+      content: diary.content,
+      thumbnailUrl: diary.thumbnailUrl,
       imageUrl: diary.thumbnailUrl,
       createdAt: diary.createdAt,
+      categoryId: diary.categoryId ?? undefined,
+      categoryName: diary.categoryName ?? undefined,
       visibility: diary.visibility,
     }),
   );

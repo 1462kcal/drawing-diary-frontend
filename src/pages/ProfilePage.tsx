@@ -86,16 +86,39 @@ export default function ProfilePage() {
         setUser(profileData);
         setDiaries(diaryData);
 
-        /*
-         * 현재 카테고리 API가 별도로 없기 때문에
-         * 임시로 Mock 카테고리를 사용
+        /**
+         * 별도의 카테고리 API가 없기 때문에
+         * 내 일기 데이터에서 카테고리를 추출한다.
+         *
+         * 같은 카테고리를 사용하는 일기가 여러 개 있어도
+         * 카테고리 패널에는 한 번만 표시한다.
          */
-        setCategories(MOCK_CATEGORIES);
+        const myCategories: Category[] = Array.from(
+          new Map(
+            diaryData
+              .filter(
+                (diary) =>
+                  diary.categoryId !== undefined &&
+                  diary.categoryId !== null &&
+                  diary.categoryName,
+              )
+              .map((diary) => [
+                diary.categoryId,
+                {
+                  id: diary.categoryId!,
+                  name: diary.categoryName!,
+                },
+              ]),
+          ).values(),
+        );
+
+        setCategories(myCategories);
       } catch (error) {
         console.error("프로필 조회 실패:", error);
 
         setUser(null);
         setDiaries([]);
+        setCategories([]);
       } finally {
         setLoading(false);
       }

@@ -1,12 +1,63 @@
-import { CanvasStage, Toolbar, Sidebar } from "../features/canvas";
+import { useRef, useState } from "react";
+import type Konva from "konva";
+
+import { CanvasStage, Toolbar, Sidebar, DiaryEditor } from "../features/canvas";
 
 import "../features/canvas/styles/canvas.css";
 
 export default function CanvasPage() {
+  const stageRef = useRef<Konva.Stage | null>(null);
+
+  const [title, setTitle] = useState("");
+  const [content, setContent] = useState("");
+  const [isSaving, setIsSaving] = useState(false);
+
+  const handleSave = async () => {
+    if (!title.trim()) {
+      alert("제목을 입력해주세요.");
+      return;
+    }
+
+    if (!content.trim()) {
+      alert("내용을 입력해주세요.");
+      return;
+    }
+
+    const stage = stageRef.current;
+
+    if (!stage) {
+      alert("그림을 불러오지 못했습니다.");
+      return;
+    }
+
+    try {
+      setIsSaving(true);
+
+      // 현재 Canvas를 이미지로 변환
+      const finalImg = stage.toDataURL({
+        pixelRatio: 1,
+      });
+
+      console.log("제목:", title);
+      console.log("내용:", content);
+      console.log("그림:", finalImg);
+
+      // TODO:
+      // finalImg를 실제 이미지 URL로 업로드한 뒤
+      // roomId와 함께 submit API 호출
+
+      alert("현재는 그림 데이터 생성까지 완료!");
+    } catch (error) {
+      console.error("일기 저장 실패:", error);
+      alert("일기 저장에 실패했습니다.");
+    } finally {
+      setIsSaving(false);
+    }
+  };
+
   return (
     <main className="canvas-page">
       <div className="canvas-shell">
-        {/* 상단 헤더 */}
         <header className="canvas-header">
           <div className="canvas-title">
             <div className="canvas-title-icon">✎</div>
@@ -19,19 +70,13 @@ export default function CanvasPage() {
           </div>
         </header>
 
-        {/* 작업 영역 */}
         <div className="canvas-body">
-          {/* 왼쪽 도구 */}
           <aside className="canvas-sidebar">
             <Sidebar />
           </aside>
 
-          {/* 가운데 펼친 일기장 */}
           <section className="canvas-workspace">
             <div className="canvas-diary-book">
-              {/* ============================
-                  왼쪽 페이지 : DRAWING
-              ============================= */}
               <section className="canvas-diary-page canvas-diary-page-left">
                 <div className="canvas-page-heading">
                   <span className="canvas-page-label">DRAWING</span>
@@ -40,7 +85,7 @@ export default function CanvasPage() {
                 </div>
 
                 <div className="canvas-drawing-area">
-                  <CanvasStage />
+                  <CanvasStage ref={stageRef} />
                 </div>
 
                 <div className="canvas-page-footer">
@@ -49,9 +94,6 @@ export default function CanvasPage() {
                 </div>
               </section>
 
-              {/* ============================
-                  오른쪽 페이지 : DIARY
-              ============================= */}
               <section className="canvas-diary-page canvas-diary-page-right">
                 <div className="canvas-page-heading">
                   <span className="canvas-page-label">DIARY</span>
@@ -59,20 +101,14 @@ export default function CanvasPage() {
                   <span className="canvas-page-hint">write your memory</span>
                 </div>
 
-                <div className="canvas-diary-editor">
-                  <div className="canvas-diary-date">2026. 09. 01</div>
-
-                  <input
-                    type="text"
-                    className="canvas-diary-title-input"
-                    placeholder="오늘의 제목..."
-                  />
-
-                  <textarea
-                    className="canvas-diary-textarea"
-                    placeholder="오늘 있었던 일을 적어보세요..."
-                  />
-                </div>
+                <DiaryEditor
+                  title={title}
+                  content={content}
+                  onTitleChange={setTitle}
+                  onContentChange={setContent}
+                  onSave={handleSave}
+                  isSaving={isSaving}
+                />
 
                 <div className="canvas-page-footer">
                   <span className="canvas-save-status">● saved</span>
@@ -83,7 +119,6 @@ export default function CanvasPage() {
             </div>
           </section>
 
-          {/* 오른쪽 도구 */}
           <aside className="canvas-toolbar">
             <Toolbar />
           </aside>
