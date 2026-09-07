@@ -9,10 +9,10 @@ export default function Sidebar() {
       <section className="canvas-panel">
         <div className="canvas-panel-titlebar">
           <span>COLOR</span>
-          <div className="canvas-panel-buttons">
+          {/* <div className="canvas-panel-buttons">
             <span />
             <span />
-          </div>
+          </div> */}
         </div>
 
         <div className="canvas-panel-content">
@@ -24,10 +24,10 @@ export default function Sidebar() {
       <section className="canvas-panel">
         <div className="canvas-panel-titlebar">
           <span>PALETTE</span>
-          <div className="canvas-panel-buttons">
+          {/* <div className="canvas-panel-buttons">
             <span />
             <span />
-          </div>
+          </div> */}
         </div>
 
         <div className="canvas-panel-content">
@@ -39,10 +39,7 @@ export default function Sidebar() {
       <section className="canvas-panel canvas-layer-panel">
         <div className="canvas-panel-titlebar">
           <span>LAYERS</span>
-          <div className="canvas-panel-buttons">
-            <span />
-            <span />
-          </div>
+          <div className="canvas-panel-buttons"></div>
         </div>
 
         <div className="canvas-panel-content">

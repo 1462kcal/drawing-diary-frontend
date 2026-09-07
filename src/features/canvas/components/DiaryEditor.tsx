@@ -19,8 +19,6 @@ export default function DiaryEditor({
   content,
   onTitleChange,
   onContentChange,
-  onSave,
-  onSubmit,
   isSaving,
   isSubmitting,
 }: DiaryEditorProps) {
@@ -54,26 +52,6 @@ export default function DiaryEditor({
         onChange={handleContentChange}
         disabled={isDisabled}
       />
-
-      <div className="canvas-diary-actions">
-        <button
-          type="button"
-          className="canvas-diary-save-button"
-          onClick={onSave}
-          disabled={isDisabled || !title.trim() || !content.trim()}
-        >
-          {isSaving ? "저장 중..." : "임시 저장"}
-        </button>
-
-        <button
-          type="button"
-          className="canvas-diary-submit-button"
-          onClick={onSubmit}
-          disabled={isDisabled || !title.trim() || !content.trim()}
-        >
-          {isSubmitting ? "발행 중..." : "일기 발행"}
-        </button>
-      </div>
     </div>
   );
 }

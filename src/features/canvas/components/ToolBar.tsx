@@ -32,10 +32,10 @@ export default function Toolbar() {
         <div className="canvas-panel-titlebar">
           <span>HISTORY</span>
 
-          <div className="canvas-panel-buttons">
+          {/* <div className="canvas-panel-buttons">
             <span />
             <span />
-          </div>
+          </div> */}
         </div>
 
         <div className="canvas-tool-panel-content">
@@ -60,10 +60,10 @@ export default function Toolbar() {
         <div className="canvas-panel-titlebar">
           <span>TOOLS</span>
 
-          <div className="canvas-panel-buttons">
+          {/* <div className="canvas-panel-buttons">
             <span />
             <span />
-          </div>
+          </div> */}
         </div>
 
         <div className="canvas-tool-panel-content">
@@ -107,10 +107,10 @@ export default function Toolbar() {
         <div className="canvas-panel-titlebar">
           <span>BRUSH</span>
 
-          <div className="canvas-panel-buttons">
+          {/* <div className="canvas-panel-buttons">
             <span />
             <span />
-          </div>
+          </div> */}
         </div>
 
         <div className="canvas-tool-panel-content">

@@ -239,15 +239,31 @@ export default function CanvasPage() {
           <div className="canvas-title">
             <div className="canvas-title-icon">✎</div>
 
-            <span>그림일기 만들기</span>
+            <span>그림일기 작성</span>
           </div>
 
-          <div className="canvas-header-status">
-            <span className="canvas-status-dot" />
+          <div className="canvas-header-actions">
+            <button
+              type="button"
+              className="canvas-header-save-button"
+              onClick={handleSave}
+              disabled={
+                isSaving || isSubmitting || !title.trim() || !content.trim()
+              }
+            >
+              {isSaving ? "저장 중..." : "임시 저장"}
+            </button>
 
-            <span>
-              {isSaving ? "저장 중..." : isSubmitting ? "발행 중..." : "저장됨"}
-            </span>
+            <button
+              type="button"
+              className="canvas-header-submit-button"
+              onClick={handleSubmit}
+              disabled={
+                isSaving || isSubmitting || !title.trim() || !content.trim()
+              }
+            >
+              {isSubmitting ? "발행 중..." : "발행"}
+            </button>
           </div>
         </header>
 
@@ -264,9 +280,9 @@ export default function CanvasPage() {
               {/* Drawing Page */}
               <section className="canvas-diary-page canvas-diary-page-left">
                 <div className="canvas-page-heading">
-                  <span className="canvas-page-label">DRAWING</span>
+                  {/* <span className="canvas-page-label">DRAWING</span> */}
 
-                  <span className="canvas-page-hint">draw your memory</span>
+                  {/* <span className="canvas-page-hint"></span> */}
                 </div>
 
                 <div className="canvas-drawing-area">
@@ -274,7 +290,7 @@ export default function CanvasPage() {
                 </div>
 
                 <div className="canvas-page-footer">
-                  <span>my little drawing</span>
+                  <span></span>
 
                   <span>01</span>
                 </div>
@@ -283,9 +299,9 @@ export default function CanvasPage() {
               {/* Diary Page */}
               <section className="canvas-diary-page canvas-diary-page-right">
                 <div className="canvas-page-heading">
-                  <span className="canvas-page-label">DIARY</span>
+                  {/* <span className="canvas-page-label">DIARY</span> */}
 
-                  <span className="canvas-page-hint">write your memory</span>
+                  {/* <span className="canvas-page-hint"></span> */}
                 </div>
 
                 <DiaryEditor

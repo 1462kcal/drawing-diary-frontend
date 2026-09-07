@@ -1760,3 +1760,74 @@
 
   cursor: pointer;
 }
+
+/* =========================================================
+Header Action Buttons
+========================================================= */
+
+.canvas-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  height: 100%;
+}
+
+/* 공통 */
+.canvas-header-actions button {
+  height: 20px;
+  box-sizing: border-box;
+
+  padding: 0 8px;
+
+  border: 1px solid var(--border);
+  border-radius: 0;
+
+  font-family: "Courier New", monospace;
+  font-size: 7px;
+  font-weight: bold;
+  line-height: 18px;
+
+  cursor: pointer;
+
+  box-shadow: 1px 1px 0 rgba(128, 111, 115, 0.2);
+
+  transition:
+    background 0.1s ease,
+    transform 0.1s ease;
+}
+
+/* 임시 저장 */
+.canvas-header-save-button {
+  background: #fffdf9;
+  color: var(--text);
+}
+
+.canvas-header-save-button:hover:not(:disabled) {
+  background: var(--pink-pale);
+  color: var(--pink-dark);
+}
+
+/* 발행 */
+.canvas-header-submit-button {
+  background: var(--pink-light);
+  border-color: var(--pink-dark) !important;
+
+  color: #684f57;
+}
+
+.canvas-header-submit-button:hover:not(:disabled) {
+  background: var(--pink-main);
+}
+
+/* 클릭 */
+.canvas-header-actions button:active:not(:disabled) {
+  transform: translate(1px, 1px);
+  box-shadow: none;
+}
+
+/* 비활성 */
+.canvas-header-actions button:disabled {
+  opacity: 0.45;
+  cursor: default;
+  box-shadow: none;
+}
